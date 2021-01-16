@@ -5,7 +5,6 @@
  * 
  * Version 1.0 (1/15/20) - 
  * 
- * 
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -26,7 +25,7 @@ namespace GameBoard
         public void NewGameBoardTest()
         {
             GameBoard board = new GameBoard();
-            board.
+            
         }
     }
 }
