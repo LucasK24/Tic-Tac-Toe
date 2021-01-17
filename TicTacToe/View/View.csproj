@@ -81,7 +81,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\kisspng-tic-tac-toe-bitmap-computer-icons-bmp-file-format-5b212cde520e92.4886368715289008303361.png" />
+    <ProjectReference Include="..\GameBoard\GameBoard.csproj">
+      <Project>{8ea14c37-abdb-4ab8-8a0c-1be1feab1df3}</Project>
+      <Name>GameBoard</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

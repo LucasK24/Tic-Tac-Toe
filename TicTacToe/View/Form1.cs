@@ -15,6 +15,8 @@ namespace View
         public Form1()
         {
             InitializeComponent();
+            gridPicture.Image = Image.FromFile(@"..\..\..\Resources\Images\Grid.png");
+            GameBoard board = new GameBoard();
         }
     }
 }

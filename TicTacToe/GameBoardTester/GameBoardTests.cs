@@ -18,11 +18,11 @@ namespace GameBoard
         public void NewGameBoardTest()
         {
             GameBoard board = new GameBoard();
-            board.
+            
         }
 
         [TestMethod]
-        public void NewGameBoardTest()
+        public void testttt()
         {
             GameBoard board = new GameBoard();
             

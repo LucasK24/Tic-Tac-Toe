@@ -59,16 +59,5 @@ namespace View.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap kisspng_tic_tac_toe_bitmap_computer_icons_bmp_file_format_5b212cde520e92_4886368715289008303361 {
-            get {
-                object obj = ResourceManager.GetObject("kisspng-tic-tac-toe-bitmap-computer-icons-bmp-file-format-5b212cde520e92.48863687" +
-                        "15289008303361", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }
