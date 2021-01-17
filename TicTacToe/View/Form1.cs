@@ -159,20 +159,20 @@ namespace View
             // Update the rest of the board.
             if (board.IsGameOver())
             {
-                p1Wins.Text = board.p1Wins.ToString();
-                p2Wins.Text = board.p2Wins.ToString();
+                p1Wins.Text = board.P1Wins.ToString();
+                p2Wins.Text = board.P2Wins.ToString();
                 statusIndicator.Text = "Game Over";
             }
             else
             {
                 // See which player is up.
-                if(board.IsP1Turn())
+                if (board.IsP1Turn())
                 {
-                    statusIndicator.Text = "P1's Turn";
+                    statusIndicator.Text = "Player 1's Turn";
                 }
                 else
                 {
-                    statusIndicator.Text = "P2's Turn";
+                    statusIndicator.Text = "Player 2's Turn";
                 }
             }
         }

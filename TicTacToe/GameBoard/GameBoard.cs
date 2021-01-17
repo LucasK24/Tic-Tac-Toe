@@ -27,12 +27,12 @@ namespace Model
         private int totalMoves;
 
         // Win totals of each player. 
-        public int p1Wins
+        public int P1Wins
         {
             get; private set;
         }
 
-        public int p2Wins
+        public int P2Wins
         {
             get; private set;
         }
@@ -48,8 +48,8 @@ namespace Model
             // Set up fields. Set p1FirstTurn to false so that it will become true from calling NewGame.
             p1FirstTurn = false;
             NewGame();
-            p1Wins = 0;
-            p2Wins = 0;
+            P1Wins = 0;
+            P2Wins = 0;
         }
 
         /// <summary>
@@ -101,11 +101,11 @@ namespace Model
                 gameOver = true;
                 if (p1Turn)
                 {
-                    p1Wins++;
+                    P1Wins++;
                 }
                 else
                 {
-                    p2Wins++;
+                    P2Wins++;
                 }
             }
             else if (totalMoves > 8)
