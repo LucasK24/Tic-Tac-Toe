@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Model;
 
 namespace View
 {
@@ -15,7 +16,7 @@ namespace View
         public Form1()
         {
             InitializeComponent();
-            gridPicture.Image = Image.FromFile(@"..\..\..\Resources\Images\Grid.png");
+            //gridPicture.Image = Image.FromFile(@"..\..\..\Resources\Images\Grid.png");
             GameBoard board = new GameBoard();
         }
     }

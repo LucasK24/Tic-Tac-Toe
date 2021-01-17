@@ -9,7 +9,7 @@
 using System;
 
 
-namespace GameBoard
+namespace Model
 {
     /// <summary>
     /// Represents a tic-tac-toe board.

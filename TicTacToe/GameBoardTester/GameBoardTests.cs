@@ -9,7 +9,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GameBoard
+namespace Model
 {
     [TestClass]
     public class GameBoardTests

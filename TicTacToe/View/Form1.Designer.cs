@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.p1Label = new System.Windows.Forms.Label();
             this.p2Label = new System.Windows.Forms.Label();
             this.p1Wins = new System.Windows.Forms.TextBox();
@@ -35,6 +36,7 @@
             this.newGame = new System.Windows.Forms.Button();
             this.statusIndicator = new System.Windows.Forms.Label();
             this.gridPicture = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridPicture)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,17 +94,28 @@
             // 
             // gridPicture
             // 
+            this.gridPicture.Image = ((System.Drawing.Image)(resources.GetObject("gridPicture.Image")));
             this.gridPicture.Location = new System.Drawing.Point(80, 90);
             this.gridPicture.Name = "gridPicture";
             this.gridPicture.Size = new System.Drawing.Size(483, 478);
             this.gridPicture.TabIndex = 7;
             this.gridPicture.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(108, 129);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(137, 126);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(660, 580);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.gridPicture);
             this.Controls.Add(this.statusIndicator);
             this.Controls.Add(this.newGame);
@@ -126,6 +139,7 @@
         private System.Windows.Forms.Button newGame;
         private System.Windows.Forms.Label statusIndicator;
         private System.Windows.Forms.PictureBox gridPicture;
+        private System.Windows.Forms.Button button1;
     }
 }
 

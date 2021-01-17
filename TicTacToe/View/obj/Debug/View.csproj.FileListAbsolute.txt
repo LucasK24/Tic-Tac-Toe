@@ -8,3 +8,6 @@ C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.csproj.Gen
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.csproj.CoreCompileInputs.cache
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.exe
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.pdb
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\bin\Debug\GameBoard.dll
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\bin\Debug\GameBoard.pdb
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.csproj.CopyComplete
