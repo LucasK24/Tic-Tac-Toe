@@ -16,8 +16,17 @@ namespace View
         public Form1()
         {
             InitializeComponent();
-            //gridPicture.Image = Image.FromFile(@"..\..\..\Resources\Images\Grid.png");
             GameBoard board = new GameBoard();
+        }
+
+        private void topLeft_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void topMiddle_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
