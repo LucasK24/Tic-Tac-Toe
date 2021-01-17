@@ -1,0 +1,9 @@
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\GameBoard\bin\Debug\netstandard2.0\GameBoard.deps.json
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\GameBoard\bin\Debug\netstandard2.0\GameBoard.dll
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\GameBoard\bin\Debug\netstandard2.0\GameBoard.pdb
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\GameBoard\obj\Debug\netstandard2.0\GameBoard.csprojAssemblyReference.cache
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\GameBoard\obj\Debug\netstandard2.0\GameBoard.AssemblyInfoInputs.cache
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\GameBoard\obj\Debug\netstandard2.0\GameBoard.AssemblyInfo.cs
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\GameBoard\obj\Debug\netstandard2.0\GameBoard.csproj.CoreCompileInputs.cache
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\GameBoard\obj\Debug\netstandard2.0\GameBoard.dll
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\GameBoard\obj\Debug\netstandard2.0\GameBoard.pdb
