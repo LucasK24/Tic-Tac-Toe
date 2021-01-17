@@ -73,18 +73,22 @@
             // p1Wins
             // 
             this.p1Wins.Enabled = false;
-            this.p1Wins.Location = new System.Drawing.Point(119, 66);
+            this.p1Wins.Location = new System.Drawing.Point(129, 64);
             this.p1Wins.Name = "p1Wins";
-            this.p1Wins.Size = new System.Drawing.Size(60, 20);
+            this.p1Wins.Size = new System.Drawing.Size(46, 20);
             this.p1Wins.TabIndex = 3;
+            this.p1Wins.Text = "0";
+            this.p1Wins.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // p2Wins
             // 
             this.p2Wins.Enabled = false;
-            this.p2Wins.Location = new System.Drawing.Point(483, 66);
+            this.p2Wins.Location = new System.Drawing.Point(493, 64);
             this.p2Wins.Name = "p2Wins";
-            this.p2Wins.Size = new System.Drawing.Size(69, 20);
+            this.p2Wins.Size = new System.Drawing.Size(46, 20);
             this.p2Wins.TabIndex = 4;
+            this.p2Wins.Text = "0";
+            this.p2Wins.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // newGame
             // 
@@ -94,6 +98,7 @@
             this.newGame.TabIndex = 5;
             this.newGame.Text = "New Game";
             this.newGame.UseVisualStyleBackColor = true;
+            this.newGame.Click += new System.EventHandler(this.newGame_Click);
             // 
             // statusIndicator
             // 
@@ -159,6 +164,7 @@
             this.topRight.Size = new System.Drawing.Size(126, 133);
             this.topRight.TabIndex = 10;
             this.topRight.UseVisualStyleBackColor = false;
+            this.topRight.Click += new System.EventHandler(this.topRight_Click);
             // 
             // centerLeft
             // 
@@ -173,6 +179,7 @@
             this.centerLeft.Size = new System.Drawing.Size(126, 131);
             this.centerLeft.TabIndex = 11;
             this.centerLeft.UseVisualStyleBackColor = false;
+            this.centerLeft.Click += new System.EventHandler(this.centerLeft_Click);
             // 
             // centerMiddle
             // 
@@ -187,6 +194,7 @@
             this.centerMiddle.Size = new System.Drawing.Size(126, 131);
             this.centerMiddle.TabIndex = 12;
             this.centerMiddle.UseVisualStyleBackColor = false;
+            this.centerMiddle.Click += new System.EventHandler(this.centerMiddle_Click);
             // 
             // centerRight
             // 
@@ -201,6 +209,7 @@
             this.centerRight.Size = new System.Drawing.Size(126, 131);
             this.centerRight.TabIndex = 13;
             this.centerRight.UseVisualStyleBackColor = false;
+            this.centerRight.Click += new System.EventHandler(this.centerRight_Click);
             // 
             // bottomLeft
             // 
@@ -215,6 +224,7 @@
             this.bottomLeft.Size = new System.Drawing.Size(126, 138);
             this.bottomLeft.TabIndex = 14;
             this.bottomLeft.UseVisualStyleBackColor = false;
+            this.bottomLeft.Click += new System.EventHandler(this.bottomLeft_Click);
             // 
             // bottomMiddle
             // 
@@ -229,6 +239,7 @@
             this.bottomMiddle.Size = new System.Drawing.Size(126, 138);
             this.bottomMiddle.TabIndex = 15;
             this.bottomMiddle.UseVisualStyleBackColor = false;
+            this.bottomMiddle.Click += new System.EventHandler(this.bottomMiddle_Click);
             // 
             // bottomRight
             // 
@@ -243,6 +254,7 @@
             this.bottomRight.Size = new System.Drawing.Size(126, 138);
             this.bottomRight.TabIndex = 16;
             this.bottomRight.UseVisualStyleBackColor = false;
+            this.bottomRight.Click += new System.EventHandler(this.bottomRight_Click);
             // 
             // tableLayoutPanel1
             // 

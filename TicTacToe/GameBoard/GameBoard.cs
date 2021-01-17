@@ -27,8 +27,15 @@ namespace Model
         private int totalMoves;
 
         // Win totals of each player. 
-        public int p1Wins;
-        private int p2Wins;
+        public int p1Wins
+        {
+            get; private set;
+        }
+
+        public int p2Wins
+        {
+            get; private set;
+        }
 
         // Indicates if the game is over and play should be stopped.
         private bool gameOver;
@@ -52,6 +59,7 @@ namespace Model
         {
             board = new char[3, 3];
             gameOver = false;
+            totalMoves = 0;
 
             // First turn alternates between games.
             p1FirstTurn = !p1FirstTurn;
@@ -104,6 +112,9 @@ namespace Model
             {
                 gameOver = true;
             }
+
+            // It's now P2's turn.
+            p1Turn = !p1Turn;
         }
 
         /// <summary>
@@ -134,6 +145,13 @@ namespace Model
             return false;
         }
 
+        /// <summary>
+        /// Returns the game board's underlying matrix so that the view can be updated.
+        /// </summary>
+        public char[,] GetBoard()
+        {
+            return board;
+        }
         /// <summary>
         /// Indicates who's turn it is next.
         /// </summary>
