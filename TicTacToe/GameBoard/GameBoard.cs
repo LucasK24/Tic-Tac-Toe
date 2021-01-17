@@ -3,8 +3,8 @@
  * 
  * Author: Lucas Katsanevas
  * 
- * Version 1.0 (1/15/20) - Created constructor and code skeleton.
- * Version 1.1 (1/15/20) - Implemented all methods....
+ * Version 1.0 (1/15/21) - Created constructor and code skeleton.
+ * Version 1.1 (1/15/21) - Implemented methods and created properties.
  */
 using System;
 
