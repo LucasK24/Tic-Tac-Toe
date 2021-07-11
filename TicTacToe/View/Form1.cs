@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model;
+using System.Media;
 
 namespace View
 {
@@ -26,6 +27,8 @@ namespace View
     public partial class Form1 : Form
     {
         private GameBoard board;
+        private SoundPlayer moveAudio;
+        private SoundPlayer winnerAudio;
 
         /// <summary>
         /// Constructs the view.
@@ -34,6 +37,8 @@ namespace View
         {
             InitializeComponent();
             board = new GameBoard();
+            moveAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\ONoise.wav");
+            winnerAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\cheering.wav");
         }
 
         /// <summary>
@@ -127,14 +132,18 @@ namespace View
         }
 
         /// <summary>
-        /// Makes the move, then updates everything on the view.
+        /// Makes the move, then updates everything on the view and plays audio if needed.
         /// </summary>
         /// <param name="row"></param>
         /// <param name="col"></param>
         private void ExecuteMove(int row, int col)
         {
-            board.MakeMove(row, col);
-            UpdateBoard();
+            if (board.MakeMove(row, col))
+            {
+                moveAudio.Play();
+                UpdateBoard();
+            }
+
             
         }
         /// <summary>
@@ -159,6 +168,7 @@ namespace View
             // Update the rest of the board.
             if (board.IsGameOver())
             {
+                winnerAudio.Play();
                 p1Wins.Text = board.P1Wins.ToString();
                 p2Wins.Text = board.P2Wins.ToString();
                 statusIndicator.Text = "Game Over";

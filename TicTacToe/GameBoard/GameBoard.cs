@@ -8,7 +8,6 @@
  */
 using System;
 
-
 namespace Model
 {
     /// <summary>
@@ -76,12 +75,12 @@ namespace Model
         /// <summary>
         /// Checks if a move is valid at the given row and column. If so, makes the move for whichever player is up.
         /// </summary>
-        public void MakeMove(int row, int col)
+        public bool MakeMove(int row, int col)
         {
             // If the move is invalid, do nothing.
             if (gameOver || board[row, col] != '\u0000')
             {
-                return;
+                return false;
             }
 
             // Place move on the board.
@@ -113,8 +112,10 @@ namespace Model
                 gameOver = true;
             }
 
-            // It's now P2's turn.
+            // It's now other player's turn.
             p1Turn = !p1Turn;
+
+            return true;
         }
 
         /// <summary>

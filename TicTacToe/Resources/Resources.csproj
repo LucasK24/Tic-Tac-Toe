@@ -36,6 +36,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Audio\cheering.wav" />
+    <Content Include="Audio\XNoise.wav" />
+    <Content Include="Audio\ONoise.wav" />
+    <Content Include="Audio\mixkit-magic-rewind-transition-1086.wav" />
+    <Content Include="Audio\winner.wav" />
     <Content Include="Images\Grid.png" />
     <Content Include="README.txt" />
   </ItemGroup>
