@@ -25,16 +25,8 @@ namespace Model
         // Keeps track of the number of moves played this board.
         private int totalMoves;
 
-        // Win totals of each player. 
-        public int P1Wins
-        {
-            get; private set;
-        }
-
-        public int P2Wins
-        {
-            get; private set;
-        }
+        // Indicates who won the previous game. X for P1, O for P2, and null for a tie.
+        private char lastResult;
 
         // Indicates if the game is over and play should be stopped.
         private bool gameOver;
@@ -47,8 +39,7 @@ namespace Model
             // Set up fields. Set p1FirstTurn to false so that it will become true from calling NewGame.
             p1FirstTurn = false;
             NewGame();
-            P1Wins = 0;
-            P2Wins = 0;
+            lastResult = '\u0000';
         }
 
         /// <summary>
@@ -100,21 +91,21 @@ namespace Model
                 gameOver = true;
                 if (p1Turn)
                 {
-                    P1Wins++;
+                    lastResult = 'X';
                 }
                 else
                 {
-                    P2Wins++;
+                    lastResult = 'O';
                 }
             }
             else if (totalMoves > 8)
             {
                 gameOver = true;
+                lastResult = '\u0000';
             }
 
-            // It's now other player's turn.
+            // It's now the other player's turn.
             p1Turn = !p1Turn;
-
             return true;
         }
 
@@ -168,6 +159,15 @@ namespace Model
         public bool IsGameOver()
         {
             return gameOver;
+        }
+
+        /// <summary>
+        /// Returns 'X' if P1 won the last game, 'O' for P2, and null ('\u0000') for a tie.
+        /// </summary>
+        /// <returns></returns>
+        public char GetResult()
+        {
+            return lastResult;
         }
     }
 }

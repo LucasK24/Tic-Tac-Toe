@@ -18,13 +18,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model;
 using System.Media;
+using System.Threading;
 
 namespace View
 {
     /// <summary>
     /// Represents the GUI of Tic-Tac-Toe.
     /// </summary>
-    public partial class Form1 : Form
+    public partial class MultiplayerBoard : Form
     {
         private GameBoard board;
         private SoundPlayer moveAudio;
@@ -33,11 +34,11 @@ namespace View
         /// <summary>
         /// Constructs the view.
         /// </summary>
-        public Form1()
+        public MultiplayerBoard()
         {
             InitializeComponent();
             board = new GameBoard();
-            moveAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\ONoise.wav");
+            moveAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\moveNoise.wav");
             winnerAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\cheering.wav");
         }
 
@@ -168,10 +169,28 @@ namespace View
             // Update the rest of the board.
             if (board.IsGameOver())
             {
+                if(board.GetResult() == 'X')
+                {
+
+                    int wins = int.Parse(p1Wins.Text) + 1;
+                    p1Wins.Text = wins + "";
+                    statusIndicator.Text = "Player 1 Wins!";
+                }
+                else if(board.GetResult() == 'O')
+                {
+                    int wins = int.Parse(p2Wins.Text) + 1;
+                    p2Wins.Text = wins + "";
+                    statusIndicator.Text = "Player 2 Wins!";
+                }
+                else
+                {
+                    statusIndicator.Text = "Game Over!";
+                }
+                
+
+                // FIX THIS????
+                //Thread.Sleep(2000);
                 winnerAudio.Play();
-                p1Wins.Text = board.P1Wins.ToString();
-                p2Wins.Text = board.P2Wins.ToString();
-                statusIndicator.Text = "Game Over";
             }
             else
             {

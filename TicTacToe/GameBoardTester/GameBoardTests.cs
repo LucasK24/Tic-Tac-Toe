@@ -39,7 +39,7 @@ namespace Model
             board.MakeMove(1, 0);
             board.MakeMove(2, 2);
             board.MakeMove(2, 0);
-            Assert.AreEqual(1, board.P1Wins);
+            Assert.AreEqual('X', board.GetResult());
         }
 
 
@@ -53,8 +53,7 @@ namespace Model
             board.MakeMove(1, 1);
             board.MakeMove(2, 2);
             board.MakeMove(2, 1);
-            Assert.AreEqual(1, board.P2Wins);
-            Assert.AreEqual(0, board.P1Wins);
+            Assert.AreEqual('O', board.GetResult());
         }
 
 
@@ -62,15 +61,15 @@ namespace Model
         public void CreateTwoGameBoardsTest()
         {
             GameBoard board = new GameBoard();
-            Assert.AreEqual(0, board.P1Wins);
+            Assert.AreEqual('\u0000', board.GetResult());
             board.MakeMove(0, 0);
             board.MakeMove(1, 1);
             board.MakeMove(1, 0);
             board.MakeMove(2, 2);
             board.MakeMove(2, 0);
-            Assert.AreEqual(1, board.P1Wins);
+            Assert.AreEqual('X', board.GetResult());
             board = new GameBoard();
-            Assert.AreEqual(0, board.P1Wins);
+            Assert.AreEqual('\u0000', board.GetResult());
         }
 
 
@@ -125,8 +124,7 @@ namespace Model
             board.MakeMove(2, 2);
             board.MakeMove(1, 0);
             Assert.AreEqual(true, board.IsGameOver());
-            Assert.AreEqual(0, board.P1Wins);
-            Assert.AreEqual(0, board.P2Wins);
+            Assert.AreEqual('\u0000', board.GetResult());
         }
 
         [TestMethod]

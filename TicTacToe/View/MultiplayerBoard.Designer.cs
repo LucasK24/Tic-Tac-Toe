@@ -1,6 +1,6 @@
 ﻿namespace View
 {
-    partial class Form1
+    partial class MultiplayerBoard
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MultiplayerBoard));
             this.p1Label = new System.Windows.Forms.Label();
             this.p2Label = new System.Windows.Forms.Label();
             this.p1Wins = new System.Windows.Forms.TextBox();
@@ -270,7 +270,7 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(196, 45);
             this.tableLayoutPanel1.TabIndex = 17;
             // 
-            // Form1
+            // MultiplayerBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -292,7 +292,7 @@
             this.Controls.Add(this.p1Wins);
             this.Controls.Add(this.p2Label);
             this.Controls.Add(this.p1Label);
-            this.Name = "Form1";
+            this.Name = "MultiplayerBoard";
             this.Text = "Tic-Tac-Toe";
             ((System.ComponentModel.ISupportInitialize)(this.gridPicture)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
