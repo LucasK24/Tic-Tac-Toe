@@ -19,7 +19,7 @@ namespace View
 
 
             
-             Application.Run(new MultiplayerBoard());
+             Application.Run(new SinglePlayerBoardGUI());
              
 
             //Application.Run(new HomeScreen());

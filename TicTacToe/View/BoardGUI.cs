@@ -25,16 +25,16 @@ namespace View
     /// <summary>
     /// Represents the GUI of Tic-Tac-Toe.
     /// </summary>
-    public partial class MultiplayerBoard : Form
+    public partial class BoardGUI : Form
     {
-        private GameBoard board;
+        internal GameBoard board;
         private SoundPlayer moveAudio;
         private SoundPlayer winnerAudio;
 
         /// <summary>
         /// Constructs the view.
         /// </summary>
-        public MultiplayerBoard()
+        public BoardGUI()
         {
             InitializeComponent();
             board = new GameBoard();
@@ -137,7 +137,7 @@ namespace View
         /// </summary>
         /// <param name="row"></param>
         /// <param name="col"></param>
-        private void ExecuteMove(int row, int col)
+        internal void ExecuteMove(int row, int col)
         {
             if (board.MakeMove(row, col))
             {

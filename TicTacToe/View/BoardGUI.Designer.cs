@@ -1,6 +1,6 @@
 ﻿namespace View
 {
-    partial class MultiplayerBoard
+    partial class BoardGUI
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MultiplayerBoard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BoardGUI));
             this.p1Label = new System.Windows.Forms.Label();
             this.p2Label = new System.Windows.Forms.Label();
             this.p1Wins = new System.Windows.Forms.TextBox();
