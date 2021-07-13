@@ -8,9 +8,9 @@ C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.HomeScreen
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.BoardGUI.resources
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.Properties.Resources.resources
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.SelectDifficulty.resources
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.SinglePlayerBoardGUI.resources
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.csproj.GenerateResource.cache
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.csproj.CoreCompileInputs.cache
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.csproj.CopyComplete
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.exe
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.pdb
-C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.SinglePlayerBoardGUI.resources

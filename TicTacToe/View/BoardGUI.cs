@@ -27,9 +27,16 @@ namespace View
     /// </summary>
     public partial class BoardGUI : Form
     {
-        internal GameBoard board;
+        protected GameBoard board;
         private SoundPlayer moveAudio;
         private SoundPlayer winnerAudio;
+
+        // Messages for who is up/who won the game.
+        protected string p1TurnMsg = "Player 1's Turn";
+        protected string p2TurnMsg = "Player 2's Turn";
+        protected string p1WinMsg = "Player 1 Wins!";
+        protected string p2WinMsg = "Player 2 Wins!";
+        protected string gameOverMsg = "Game Over!";
 
         /// <summary>
         /// Constructs the view.
@@ -137,7 +144,7 @@ namespace View
         /// </summary>
         /// <param name="row"></param>
         /// <param name="col"></param>
-        internal void ExecuteMove(int row, int col)
+        protected virtual void ExecuteMove(int row, int col)
         {
             if (board.MakeMove(row, col))
             {
@@ -174,17 +181,17 @@ namespace View
 
                     int wins = int.Parse(p1Wins.Text) + 1;
                     p1Wins.Text = wins + "";
-                    statusIndicator.Text = "Player 1 Wins!";
+                    statusIndicator.Text = p1WinMsg;
                 }
                 else if(board.GetResult() == 'O')
                 {
                     int wins = int.Parse(p2Wins.Text) + 1;
                     p2Wins.Text = wins + "";
-                    statusIndicator.Text = "Player 2 Wins!";
+                    statusIndicator.Text = p2WinMsg;
                 }
                 else
                 {
-                    statusIndicator.Text = "Game Over!";
+                    statusIndicator.Text = gameOverMsg;
                 }
                 
 
@@ -197,11 +204,11 @@ namespace View
                 // See which player is up.
                 if (board.IsP1Turn())
                 {
-                    statusIndicator.Text = "Player 1's Turn";
+                    statusIndicator.Text = p1TurnMsg;
                 }
                 else
                 {
-                    statusIndicator.Text = "Player 2's Turn";
+                    statusIndicator.Text = p2TurnMsg;
                 }
             }
         }
