@@ -1,0 +1,9 @@
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\AIPlayer\bin\Debug\netstandard2.0\AIPlayer.deps.json
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\AIPlayer\bin\Debug\netstandard2.0\AIPlayer.dll
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\AIPlayer\bin\Debug\netstandard2.0\AIPlayer.pdb
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\AIPlayer\obj\Debug\netstandard2.0\AIPlayer.csprojAssemblyReference.cache
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\AIPlayer\obj\Debug\netstandard2.0\AIPlayer.AssemblyInfoInputs.cache
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\AIPlayer\obj\Debug\netstandard2.0\AIPlayer.AssemblyInfo.cs
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\AIPlayer\obj\Debug\netstandard2.0\AIPlayer.csproj.CoreCompileInputs.cache
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\AIPlayer\obj\Debug\netstandard2.0\AIPlayer.dll
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\AIPlayer\obj\Debug\netstandard2.0\AIPlayer.pdb

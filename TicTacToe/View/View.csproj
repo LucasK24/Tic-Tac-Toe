@@ -108,6 +108,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AIPlayer\AIPlayer.csproj">
+      <Project>{7a8babbf-92dc-4495-9fe9-5185b5f3a80a}</Project>
+      <Name>AIPlayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GameBoard\GameBoard.csproj">
       <Project>{8ea14c37-abdb-4ab8-8a0c-1be1feab1df3}</Project>
       <Name>GameBoard</Name>

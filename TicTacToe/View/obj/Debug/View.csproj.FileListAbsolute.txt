@@ -14,3 +14,5 @@ C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.csproj.Cor
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.csproj.CopyComplete
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.exe
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\obj\Debug\View.pdb
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\bin\Debug\AIPlayer.dll
+C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\View\bin\Debug\AIPlayer.pdb

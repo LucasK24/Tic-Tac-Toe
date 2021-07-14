@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using Model;
+using CPUPlayer;
 
 namespace View
 {
@@ -20,13 +21,14 @@ namespace View
         // Event must be triggered for AI to know it is time to perform turn.
         public delegate void CPUTurn(GameBoard gb);
         public event CPUTurn CPUPerformMove;
-
+        private AIPlayer ai;
 
         /// <summary>
-        /// 
+        /// Sets up the game board and makes changes for when a player is up against an AI.
         /// </summary>
-        public SinglePlayerBoardGUI()
+        public SinglePlayerBoardGUI(string difficultyLevel)
         {
+            ai = new AIPlayer(difficultyLevel);
 
             // Change P1 and P2 labels to account for CPU.
             p1Label.Text = "Player";
@@ -60,7 +62,9 @@ namespace View
                 base.ExecuteMove(row, col);
 
                 // Compute AI move by firing event to AI??????
-                CPUPerformMove(board);
+                //CPUPerformMove(board.GetBoard());
+                Tuple<int,int> move = ai.MakeMove(board.GetBoard());
+                base.ExecuteMove(move.Item1, move.Item2);
 
             }
             // Otherwise it is still the AI's turn. Nothing happens.

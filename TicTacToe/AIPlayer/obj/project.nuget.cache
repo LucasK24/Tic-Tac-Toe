@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "372PheDkby6DtywUGELIi50JR1fNoQfXTo8JR1gjgf7rlgoZzgXt+I8MsWojArh23mA7kJAL5NTgzgrw9RgimQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\AIPlayer\\AIPlayer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lkats\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\lkats\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
