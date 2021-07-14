@@ -19,9 +19,8 @@ namespace View
     public partial class SinglePlayerBoardGUI : BoardGUI
     {
         // Event must be triggered for AI to know it is time to perform turn.
-        public delegate void CPUTurn(GameBoard gb);
-        public event CPUTurn CPUPerformMove;
         private AIPlayer ai;
+        private Random rand;
 
         /// <summary>
         /// Sets up the game board and makes changes for when a player is up against an AI.
@@ -29,6 +28,7 @@ namespace View
         public SinglePlayerBoardGUI(string difficultyLevel)
         {
             ai = new AIPlayer(difficultyLevel);
+            rand = new Random();
 
             // Change P1 and P2 labels to account for CPU.
             p1Label.Text = "Player";
@@ -55,14 +55,15 @@ namespace View
         /// </summary>
         /// <param name="row"></param>
         /// <param name="col"></param>
-        protected override void ExecuteMove(int row, int col)
+        protected async override void ExecuteMove(int row, int col)
         {
             if (board.IsP1Turn())
             {
                 base.ExecuteMove(row, col);
 
-                // Compute AI move by firing event to AI??????
-                //CPUPerformMove(board.GetBoard());
+                // Execute AI move after 1 - 3 seconds.
+                int waitTime = rand.Next(1000, 3000);
+                await Task.Delay(waitTime);
                 Tuple<int,int> move = ai.MakeMove(board.GetBoard());
                 base.ExecuteMove(move.Item1, move.Item2);
 

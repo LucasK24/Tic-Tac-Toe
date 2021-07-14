@@ -5738,11 +5738,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\GameBoardTester\\GameBoardTester.csproj",
+      "projectUniqueName": "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\GameBoardTester\\GameBoardTester.csproj",
       "projectName": "GameBoardTester",
-      "projectPath": "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\GameBoardTester\\GameBoardTester.csproj",
+      "projectPath": "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\GameBoardTester\\GameBoardTester.csproj",
       "packagesPath": "C:\\Users\\lkats\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\GameBoardTester\\obj\\",
+      "outputPath": "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\GameBoardTester\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5762,8 +5762,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\GameBoard.csproj": {
-              "projectPath": "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\GameBoard.csproj"
+            "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\GameBoard.csproj": {
+              "projectPath": "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\GameBoard.csproj"
             }
           }
         }
