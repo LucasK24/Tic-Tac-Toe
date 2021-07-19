@@ -218,7 +218,7 @@ namespace View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void newGame_Click(object sender, EventArgs e)
+        protected virtual void newGame_Click(object sender, EventArgs e)
         {
             board.NewGame();
             UpdateBoard();

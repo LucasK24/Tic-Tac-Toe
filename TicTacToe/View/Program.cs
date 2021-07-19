@@ -19,7 +19,7 @@ namespace View
 
 
             
-             Application.Run(new SinglePlayerBoardGUI("ez"));
+             Application.Run(new SinglePlayerBoardGUI("Easy"));
              
 
             //Application.Run(new HomeScreen());

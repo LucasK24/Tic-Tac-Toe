@@ -61,14 +61,37 @@ namespace View
             {
                 base.ExecuteMove(row, col);
 
-                // Execute AI move after 1 - 3 seconds.
+                // Execute AI move after 1-3 seconds.
                 int waitTime = rand.Next(1000, 3000);
                 await Task.Delay(waitTime);
-                Tuple<int,int> move = ai.MakeMove(board.GetBoard());
+                Tuple<int, int> move = ai.MakeMove(board.GetBoard());
                 base.ExecuteMove(move.Item1, move.Item2);
-
             }
             // Otherwise it is still the AI's turn. Nothing happens.
+        }
+
+        /// <summary>
+        /// New game has been clicked. Reset the board and update the GUI. Go with AI if its first.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected override void newGame_Click(object sender, EventArgs e)
+        {
+            base.newGame_Click(sender, e);
+
+            if (!board.IsP1Turn())
+            {
+                AIStart();
+            }
+            //board.NewGame();
+            //UpdateBoard();
+        }
+
+        private async void AIStart()
+        {
+            await Task.Delay(3000);
+            Tuple<int, int> move = ai.MakeMove(board.GetBoard());
+            base.ExecuteMove(move.Item1, move.Item2);
         }
 
     }
