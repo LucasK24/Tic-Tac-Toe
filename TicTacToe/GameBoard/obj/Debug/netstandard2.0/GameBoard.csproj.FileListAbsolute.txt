@@ -6,3 +6,4 @@ C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\GameBoard\obj\Debug\netstandar
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\GameBoard\obj\Debug\netstandard2.0\GameBoard.csproj.CoreCompileInputs.cache
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\GameBoard\obj\Debug\netstandard2.0\GameBoard.dll
 C:\Users\lkats\Source\Repos\Tic-Tac-Toe\TicTacToe\GameBoard\obj\Debug\netstandard2.0\GameBoard.pdb
+C:\Users\lkats\source\repos\Tic-Tac-Toe\TicTacToe\GameBoard\obj\Debug\netstandard2.0\GameBoard.csprojAssemblyReference.cache
