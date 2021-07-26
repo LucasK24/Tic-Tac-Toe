@@ -30,6 +30,7 @@ namespace View
         protected GameBoard board;
         private SoundPlayer moveAudio;
         private SoundPlayer winnerAudio;
+        private SoundPlayer tieAudio;
 
         // Messages for who is up/who won the game.
         protected string p1TurnMsg = "Player 1's Turn";
@@ -45,8 +46,10 @@ namespace View
         {
             InitializeComponent();
             board = new GameBoard();
-            moveAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\moveNoise.wav");
-            winnerAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\cheering.wav");
+
+            tieAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\tie.wav");
+            moveAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\move.wav");
+            winnerAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\win.wav");
         }
 
         /// <summary>
@@ -178,26 +181,25 @@ namespace View
             {
                 if(board.GetResult() == 'X')
                 {
-
+                    winnerAudio.Play();
                     int wins = int.Parse(p1Wins.Text) + 1;
                     p1Wins.Text = wins + "";
                     statusIndicator.Text = p1WinMsg;
                 }
                 else if(board.GetResult() == 'O')
                 {
+                    winnerAudio.Play();
                     int wins = int.Parse(p2Wins.Text) + 1;
                     p2Wins.Text = wins + "";
                     statusIndicator.Text = p2WinMsg;
                 }
                 else
                 {
+                    tieAudio.Play();
                     statusIndicator.Text = gameOverMsg;
                 }
                 
-
-                // FIX THIS????
-                //Thread.Sleep(2000);
-                winnerAudio.Play();
+                
             }
             else
             {

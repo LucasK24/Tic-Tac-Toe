@@ -87,8 +87,6 @@ namespace View
             {
                 AIStart();
             }
-            //board.NewGame();
-            //UpdateBoard();
         }
 
         private async void AIStart()

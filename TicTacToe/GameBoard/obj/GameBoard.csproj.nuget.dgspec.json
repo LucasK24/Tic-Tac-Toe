@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\GameBoard.csproj": {}
+    "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\GameBoard.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\GameBoard.csproj": {
+    "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\GameBoard.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\GameBoard.csproj",
+        "projectUniqueName": "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\GameBoard.csproj",
         "projectName": "GameBoard",
-        "projectPath": "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\GameBoard.csproj",
+        "projectPath": "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\GameBoard.csproj",
         "packagesPath": "C:\\Users\\lkats\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\obj\\",
+        "outputPath": "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

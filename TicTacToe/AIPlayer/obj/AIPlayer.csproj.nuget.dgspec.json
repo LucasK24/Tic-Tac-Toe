@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\AIPlayer\\AIPlayer.csproj": {}
+    "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\AIPlayer\\AIPlayer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\AIPlayer\\AIPlayer.csproj": {
+    "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\AIPlayer\\AIPlayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\AIPlayer\\AIPlayer.csproj",
+        "projectUniqueName": "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\AIPlayer\\AIPlayer.csproj",
         "projectName": "AIPlayer",
-        "projectPath": "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\AIPlayer\\AIPlayer.csproj",
+        "projectPath": "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\AIPlayer\\AIPlayer.csproj",
         "packagesPath": "C:\\Users\\lkats\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\AIPlayer\\obj\\",
+        "outputPath": "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\AIPlayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

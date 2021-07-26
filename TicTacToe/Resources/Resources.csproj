@@ -37,10 +37,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Audio\cheering.wav" />
-    <Content Include="Audio\XNoise.wav" />
-    <Content Include="Audio\moveNoise.wav" />
-    <Content Include="Audio\mixkit-magic-rewind-transition-1086.wav" />
-    <Content Include="Audio\winner.wav" />
+    <Content Include="Audio\loss.wav" />
+    <Content Include="Audio\move.wav" />
+    <Content Include="Audio\tie.wav" />
+    <Content Include="Audio\transition.wav" />
+    <Content Include="Audio\win.wav" />
     <Content Include="Images\Grid.png" />
     <Content Include="README.txt" />
   </ItemGroup>

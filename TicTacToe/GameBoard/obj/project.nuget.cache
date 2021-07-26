@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+ZuTx6r75gq8TZUBghJ/o5/EJ0JbZ1oZ9wATZZ4IsV2H+CUm7Qyd60l/PpazBy+z+S4lS8cH0NkEwv/piojFuA==",
+  "dgSpecHash": "rsKnq9oogr1JeueXcnaUmTDEeek6MnXBeg3mfhm3hJqe24fOoIua871a9jRERcs+vfG3OibTmtaOdbg3O61r7g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\GameBoard.csproj",
+  "projectFilePath": "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\GameBoard\\GameBoard.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lkats\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\lkats\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ioFG7JkzRWZYVzlhNh4xjkmG2oahOGDKDzYYqq4Kp68TRT2HZCCIUaFSMG4cOoxNe1QG+c4+jFwGlhIj3ACwfg==",
+  "dgSpecHash": "sqpor/BSDn5/50DiUMAhfldARv/++IeEjEhK09YgvEcppp8ScGdvLKPHIDJDO715lVACz7k8JCVi+k5TNPgfYA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lkats\\source\\repos\\Tic-Tac-Toe\\TicTacToe\\GameBoardTester\\GameBoardTester.csproj",
+  "projectFilePath": "C:\\Users\\lkats\\Source\\Repos\\Tic-Tac-Toe\\TicTacToe\\GameBoardTester\\GameBoardTester.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lkats\\.nuget\\packages\\coverlet.collector\\1.2.0\\coverlet.collector.1.2.0.nupkg.sha512",
     "C:\\Users\\lkats\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",
