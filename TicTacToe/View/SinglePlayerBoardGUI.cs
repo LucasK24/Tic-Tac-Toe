@@ -61,11 +61,15 @@ namespace View
             {
                 base.ExecuteMove(row, col);
 
-                // Execute AI move after 1-3 seconds.
-                int waitTime = rand.Next(1000, 3000);
-                await Task.Delay(waitTime);
-                Tuple<int, int> move = ai.MakeMove(board.GetBoard());
-                base.ExecuteMove(move.Item1, move.Item2);
+                // Execute AI move after 1-3 seconds if game is not over.
+                if(!board.IsGameOver())
+                {
+                    int waitTime = rand.Next(1000, 3000);
+                    await Task.Delay(waitTime);
+                    Tuple<int, int> move = ai.MakeMove(board.GetBoard());
+                    base.ExecuteMove(move.Item1, move.Item2);
+                }
+
             }
             // Otherwise it is still the AI's turn. Nothing happens.
         }

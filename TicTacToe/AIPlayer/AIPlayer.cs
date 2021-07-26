@@ -17,12 +17,12 @@ namespace CPUPlayer
     {
         // Represents difficulty level ("easy", "hard", or "impossible")
         private string difficulty;
-        
+
         // Random generator for picking moves.
         private Random rand;
 
         // Dictionary mapping rowID to tuples of board row/column/diagonal.
-        private Dictionary<int, List<Tuple<int,int>>> allRows;
+        private Dictionary<int, List<Tuple<int, int>>> allRows;
 
         /// <summary>
         /// Creates an AI player with the input difficulty level. May be "Easy", "Hard", or "Impossible.
@@ -31,10 +31,11 @@ namespace CPUPlayer
         {
             difficulty = difficultyLevel;
             rand = new Random();
+            allRows = new Dictionary<int, List<Tuple<int, int>>>();
 
-            // Add the 8 different "rows" to allRows dictionary.
-            allRows[0] = new List<Tuple<int,int>>();
-            allRows[0].Add(new Tuple<int,int>(0,0));
+            // Add the 8 different "rows" to the allRows dictionary.
+            allRows[0] = new List<Tuple<int, int>>();
+            allRows[0].Add(new Tuple<int, int>(0, 0));
             allRows[0].Add(new Tuple<int, int>(0, 1));
             allRows[0].Add(new Tuple<int, int>(0, 2));
 
@@ -52,7 +53,7 @@ namespace CPUPlayer
             allRows[3].Add(new Tuple<int, int>(0, 0));
             allRows[3].Add(new Tuple<int, int>(1, 0));
             allRows[3].Add(new Tuple<int, int>(2, 0));
-            
+
             allRows[4] = new List<Tuple<int, int>>();
             allRows[4].Add(new Tuple<int, int>(0, 1));
             allRows[4].Add(new Tuple<int, int>(1, 1));
@@ -62,7 +63,7 @@ namespace CPUPlayer
             allRows[5].Add(new Tuple<int, int>(0, 2));
             allRows[5].Add(new Tuple<int, int>(1, 2));
             allRows[5].Add(new Tuple<int, int>(2, 2));
-            
+
             allRows[6] = new List<Tuple<int, int>>();
             allRows[6].Add(new Tuple<int, int>(0, 2));
             allRows[6].Add(new Tuple<int, int>(1, 1));
@@ -145,7 +146,7 @@ namespace CPUPlayer
                 return CompleteRow(board, LosingMoves[move]);
             }
 
-            // Otherwise return a random move.
+            // Otherwise make a random move.
             return MakeEasyMove(board);
         }
 
@@ -162,9 +163,9 @@ namespace CPUPlayer
         private void CheckRow(char[,] board, int rowID, List<int> WinningMoves, List<int> LosingMoves)
         {
             // Based on the rowID, get the current state of each slot in the row.
-            char first = board[allRows[rowID].Item1.Item1, allRows[rowID].Item1.Item2];
-            char second = board[allRows[rowID].Item2.Item1, allRows[rowID].Item2.Item2];
-            char third = board[allRows[rowID].Item3.Item1, allRows[rowID].Item3.Item2];
+            char first = board[allRows[rowID][0].Item1, allRows[rowID][0].Item2];
+            char second = board[allRows[rowID][1].Item1, allRows[rowID][1].Item2];
+            char third = board[allRows[rowID][2].Item1, allRows[rowID][2].Item2];
 
             // Count the number of 'X's and 'O's in the row.
             int OCounter = 0;
@@ -192,20 +193,34 @@ namespace CPUPlayer
         }
 
         /// <summary>
-        /// Returns the open move in this row, if there is one. Returns null otherwise.
+        /// Returns the open move in this row, if there is one. Returns null otherwise. This is intended to only be used
+        /// to complete a row (i.e. when there are two X's or O's and an empty spot).
         /// </summary>
         /// <param name="first"></param>
         /// <param name="second"></param>
         /// <param name="third"></param>
         /// <returns></returns>
-        private Tuple<int, int> CompleteRow(char[,] int rowID)
+        private Tuple<int, int> CompleteRow(char[,] board, int rowID)
         {
-            if (first == '\u0000')
+            // Get all positions from the rowID.
+            Tuple<int, int> first = new Tuple<int, int>(allRows[rowID][0].Item1, allRows[rowID][0].Item2);
+            Tuple<int, int> second = new Tuple<int, int>(allRows[rowID][1].Item1, allRows[rowID][1].Item2);
+            Tuple<int, int> third = new Tuple<int, int>(allRows[rowID][2].Item1, allRows[rowID][2].Item2);
+
+            // Get the moves from each position.
+            char firstChar = board[allRows[rowID][0].Item1, allRows[rowID][0].Item2];
+            char secondChar = board[allRows[rowID][1].Item1, allRows[rowID][1].Item2];
+            char thirdChar = board[allRows[rowID][2].Item1, allRows[rowID][2].Item2];
+
+            // Return the empty one.
+            if (firstChar == '\u0000')
                 return first;
-            else if
-            else if
+            else if (secondChar == '\u0000')
+                return second;
+            else if (thirdChar == '\u0000')
+                return third;
             else
-                                return null;
+                return null;
         }
 
 
