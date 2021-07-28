@@ -22,6 +22,10 @@ namespace View
         private AIPlayer ai;
         private Random rand;
 
+
+        // Keeps track of if  first move has been made. This way, clicking newGame multiple times results in only one move.
+        private bool firstMoveMade;
+
         /// <summary>
         /// Sets up the game board and makes changes for when a player is up against an AI.
         /// </summary>
@@ -55,19 +59,21 @@ namespace View
         /// </summary>
         /// <param name="row"></param>
         /// <param name="col"></param>
-        protected async override void ExecuteMove(int row, int col)
+        protected override void ExecuteMove(int row, int col)
         {
             if (board.IsP1Turn())
             {
                 base.ExecuteMove(row, col);
 
-                // Execute AI move after 1-3 seconds if game is not over.
-                if(!board.IsGameOver())
+                // Execute AI move after 1-3 seconds if game is not over. Pass false to indicate it's not the first move of a game.
+                if (!board.IsGameOver())
                 {
-                    int waitTime = rand.Next(1000, 3000);
-                    await Task.Delay(waitTime);
-                    Tuple<int, int> move = ai.MakeMove(board.GetBoard());
-                    base.ExecuteMove(move.Item1, move.Item2);
+                    while (backgroundWorker.IsBusy)
+                    {
+                        Application.DoEvents();
+                    }
+
+                    backgroundWorker.RunWorkerAsync(false);
                 }
 
             }
@@ -81,20 +87,64 @@ namespace View
         /// <param name="e"></param>
         protected override void newGame_Click(object sender, EventArgs e)
         {
+            // Cancel the AI's next move since new game was clicked (if it had a next move being made).
+            backgroundWorker.CancelAsync();
+
             base.newGame_Click(sender, e);
+            firstMoveMade = false;
 
             if (!board.IsP1Turn())
             {
-                AIStart();
+                while (backgroundWorker.IsBusy)
+                {
+                    Application.DoEvents();
+                }
+
+                // BackgroundWorker no longer busy. Can make move now. Pass true to indicate it's the first move of a game.
+                backgroundWorker.RunWorkerAsync(true);
             }
         }
 
-        private async void AIStart()
+
+        /// <summary>
+        /// Waits for 1-3 seconds before making a move.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            await Task.Delay(3000);
+            bool isNewGameFirstMove = (bool) e.Argument;
+            if(isNewGameFirstMove)
+            {
+                // If this is a new game, check to make sure clicking new game 2+ times didn't cause the first move to be made already.
+                if (firstMoveMade)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
+            firstMoveMade = true;
+           
+            int waitTime = rand.Next(1000, 3000);
+            Thread.Sleep(waitTime);
+
+            if (backgroundWorker.CancellationPending)
+                e.Cancel = true;
+        }
+
+        /// <summary>
+        /// Performs the AI's move.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+                return;
+
             Tuple<int, int> move = ai.MakeMove(board.GetBoard());
             base.ExecuteMove(move.Item1, move.Item2);
         }
-
     }
 }

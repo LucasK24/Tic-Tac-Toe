@@ -29,7 +29,14 @@ namespace View
         /// </summary>
         private void InitializeComponent()
         {
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
+            // 
+            // backgroundWorker
+            // 
+            this.backgroundWorker.WorkerSupportsCancellation = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
             // SinglePlayerBoardGUI
             // 
@@ -44,5 +51,7 @@ namespace View
         }
 
         #endregion
+
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }
