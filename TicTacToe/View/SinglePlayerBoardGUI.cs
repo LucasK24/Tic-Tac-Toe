@@ -22,7 +22,6 @@ namespace View
         private AIPlayer ai;
         private Random rand;
 
-
         // Keeps track of if  first move has been made. This way, clicking newGame multiple times results in only one move.
         private bool firstMoveMade;
 
@@ -113,8 +112,8 @@ namespace View
         /// <param name="e"></param>
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            bool isNewGameFirstMove = (bool) e.Argument;
-            if(isNewGameFirstMove)
+            bool isNewGameFirstMove = (bool)e.Argument;
+            if (isNewGameFirstMove)
             {
                 // If this is a new game, check to make sure clicking new game 2+ times didn't cause the first move to be made already.
                 if (firstMoveMade)
@@ -124,8 +123,6 @@ namespace View
                 }
             }
 
-            firstMoveMade = true;
-           
             int waitTime = rand.Next(1000, 3000);
             Thread.Sleep(waitTime);
 
@@ -140,11 +137,18 @@ namespace View
         /// <param name="e"></param>
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-                return;
+            // Disable the new game button so that a new game can't be started when the move is being made.
+            newGame.Enabled = false;
+            // Return if the move was cancelled from new game being clicked.
+            if (!e.Cancelled)
+            {
+                
+                firstMoveMade = true;
+                Tuple<int, int> move = ai.MakeMove(board.GetBoard());
+                base.ExecuteMove(move.Item1, move.Item2);
+            }
 
-            Tuple<int, int> move = ai.MakeMove(board.GetBoard());
-            base.ExecuteMove(move.Item1, move.Item2);
+            newGame.Enabled = true;
         }
     }
 }

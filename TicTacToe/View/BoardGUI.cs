@@ -153,9 +153,7 @@ namespace View
             {
                 moveAudio.Play();
                 UpdateBoard();
-            }
-
-            
+            }       
         }
         /// <summary>
         /// Updates the view to represent the current state of the game.
@@ -197,9 +195,7 @@ namespace View
                 {
                     tieAudio.Play();
                     statusIndicator.Text = gameOverMsg;
-                }
-                
-                
+                }            
             }
             else
             {

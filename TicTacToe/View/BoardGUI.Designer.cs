@@ -307,7 +307,7 @@
         protected System.Windows.Forms.Label p2Label;
         private System.Windows.Forms.TextBox p1Wins;
         private System.Windows.Forms.TextBox p2Wins;
-        private System.Windows.Forms.Button newGame;
+        protected System.Windows.Forms.Button newGame;
         protected System.Windows.Forms.Label statusIndicator;
         private System.Windows.Forms.PictureBox gridPicture;
         private System.Windows.Forms.Button topLeft;
