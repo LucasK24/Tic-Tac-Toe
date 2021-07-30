@@ -236,6 +236,24 @@ namespace CPUPlayer
         /// <returns></returns>
         private Tuple<int, int> MakeImpossibleMove(char[,] board)
         {
+            // Check if this is the opening move to be made...
+            // i.e. if(....)
+            // Similarly, check if this is the second move (opening AI move)
+
+
+            // Check if there is a winning move possible, then if there is a losing move to be blocked (may need to change CheckRow/MakeHardMove to account for this).
+            //CheckRow(..);
+
+            // See if a forking situation can occur. We may be able to do this using a dummy table and calling CheckRow to see if 2 different ways to win pop up.
+
+            // If a forking situation cannot occur, check if we can block a fork from occuring in a similar fashion.
+
+            // Otherwise, play: center, opposite corner, empty corner, empty side.
+            
+
+
+
+
             return null;
         }
 

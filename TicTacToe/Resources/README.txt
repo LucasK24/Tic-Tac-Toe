@@ -3,9 +3,12 @@
 Author: Lucas Katsenevas
 Last Modified: 1/16/2021
 
-Currently, this tic-tac-toe game supports local multiplayer. The game keeps track of each player's total wins,
+Currently, this tic-tac-toe game supports local multiplayer and playing against an AI. The game keeps track of each player's total wins,
 while switching between who goes first each game. There is a new game button that can be pressed after a game is over,
-or during if the users would like. Player 1 is always X's, while player 2 is always O's.
+or during if the users would like.
 
-In future versions, I would like to implement a player vs AI option and a networked 1v1 option. In addition, I would
-like to make it so players can customize their names and have the winning spots turn green when a win occurs.
+The AI has 3 difficulty levels - easy, hard, and impossible. On easy, the AI plays random moves, each with equal probability. On hard, the AI
+always makes winning moves (completes 3 in a row if there are already 2 of the 3 moves made) and blocks losses if possible (the opponent getting
+3 in a row on the subsequent move). On impossible difficulty, the AI will never lose.... (FINISH)
+
+All sound effects come from: https://mixkit.co/
