@@ -281,16 +281,17 @@ namespace CPUPlayer
 
             // If a forking situation cannot occur, check if we can block a fork from occuring in a similar fashion.
 
-            // Otherwise, play: center, opposite corner, empty corner, empty side.
+            // Otherwise, play (in this order): center, opposite corner, empty corner, or empty side.
             if (board[1, 1] == '\u0000')
                 return center;
-            
-            // FILL IN: opposite corner stuff
-            // FILL IN: empty corner
-            // FILL IN: empty side
-            //POSSIBLY will need a MakeThirdMove() before these....
 
-            return null;
+            //POSSIBLY will need a MakeThirdMove() before these....
+            // FILL IN: opposite corner stuff
+
+            if (board[0, 0] == '\u0000' || board[0, 2] == '\u0000' || board[2, 0] == '\u0000' || board[2, 2] == '\u0000')
+                return PickRandomCorner(board);
+
+            return PickRandomSide(board);
         }
 
         /// <summary>
@@ -300,18 +301,12 @@ namespace CPUPlayer
         /// <returns></returns>
         private Tuple<int, int> MakeOpeningMove(char[,] board)
         {
-            // Randomly choose a corner or the middle, all with equal probability. FIX FOR PICKRANDOMCONER!!!
+            // Randomly choose a corner or the middle spot with equal probability for each spot.
             int nextMove = rand.Next(5);
             if (nextMove == 0)
-                return corners[0];
-            if (nextMove == 1)
-                return corners[1];
-            if (nextMove == 2)
-                return corners[2];
-            if (nextMove == 3)
-                return corners[3];
-            else
                 return center;
+            else
+                return PickRandomCorner(board);
         }
 
         /// <summary>
@@ -323,14 +318,77 @@ namespace CPUPlayer
         {
             // If the player is in the center, play a corner
             if (board[1, 1] == 'X')
-                return PickRandomCorner();
+                return PickRandomCorner(board);
 
             // If the player is in a corner, play center.
             if (board[0, 0] == 'X' || board[0, 2] == 'X' || board[2, 0] == 'X' || board[2, 2] == 'X')
                 return center;
 
-            // If the player chose a side, play center, a corner beside it, or the side across from it.
+            // If the player chose a side: play the center, a corner beside it, or the side across from it.
             return center; // FIX??? RETURN OTHER POSSIBILITIES LATER!!!
+        }
+
+        /// <summary>
+        /// Randomly selects an open corner space.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns>A tuple<int,int> of the row-column pair.</int></returns>
+        private Tuple<int, int> PickRandomCorner(char[,] board)
+        {
+            // Go until we get an empty spot.
+            while (true)
+            {
+                int nextMove = rand.Next(4);
+                if (nextMove == 0)
+                {
+                    //Check if the spot is empty, otherwise continue looping.
+                    if (board[0, 0] == '\u0000')
+                        return corners[0];
+                }
+                else if (nextMove == 1)
+                {
+                    if (board[0, 2] == '\u0000')
+                        return corners[1];
+                }
+                else if (nextMove == 2)
+                {
+                    if (board[2, 0] == '\u0000')
+                        return corners[2];
+                }
+                else if (board[2, 2] == '\u0000')
+                    return corners[3];
+            }
+        }
+
+        /// <summary>
+        /// Randomly selects an open side space.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns>A tuple<int,int> of the row-column pair.</int></returns>
+        private Tuple<int, int> PickRandomSide(char[,] board)
+        {
+            // Loop until we get an empty side.
+            while (true)
+            {
+                int nextMove = rand.Next(4);
+                if (nextMove == 0)
+                {
+                    if (board[0, 1] == '\u0000')
+                        return sides[0];
+                }
+                else if (nextMove == 1)
+                {
+                    if (board[1, 0] == '\u0000')
+                        return sides[1];
+                }
+                else if (nextMove == 2)
+                {
+                    if (board[1, 2] == '\u0000')
+                        return sides[2];
+                }
+                else if (board[2, 1] == '\u0000')
+                    return sides[3];
+            }
         }
 
 
