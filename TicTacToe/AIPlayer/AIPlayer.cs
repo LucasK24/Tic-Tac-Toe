@@ -1,28 +1,39 @@
 ﻿/*
- *
- *
- *
+ * Represents an AI player for easy, hard, and impossible difficulties.
+ * 
+ * Author: Lucas Katsanevas
+ * 
+ * Version 1.0 (1/16/21) - Created button click events.
+ * Version 1.1 (1/16/21) - Implemented ExecuteMove and UpdateBoard.
  */
 
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Model;
 
 namespace CPUPlayer
 {
     /// <summary>
-    /// 
+    /// An AI player of one of three difficulties. An "Easy" AI makes random moves,
+    /// a "Hard" AI makes winning moves and blocks opponent winning moves from occuring, and
+    /// an "Impossible" AI will always win or tie.
     /// </summary>
     public class AIPlayer
     {
-        // Represents difficulty level ("easy", "hard", or "impossible")
+        // Represents difficulty level ("Easy", "Hard", or "Impossible")
         private string difficulty;
 
-        // Random generator for picking moves.
+        // Random generator for picking between moves.
         private Random rand;
 
         // Dictionary mapping rowID to tuples of board row/column/diagonal.
         private Dictionary<int, List<Tuple<int, int>>> allRows;
+
+        // Lists of corner and side spaces for easy access.
+        private List<Tuple<int, int>> corners;
+        private List<Tuple<int, int>> sides;
+        private readonly Tuple<int, int> center;
 
         /// <summary>
         /// Creates an AI player with the input difficulty level. May be "Easy", "Hard", or "Impossible.
@@ -32,6 +43,22 @@ namespace CPUPlayer
             difficulty = difficultyLevel;
             rand = new Random();
             allRows = new Dictionary<int, List<Tuple<int, int>>>();
+
+            // Put all corner and side lists into the correct lists.
+            corners = new List<Tuple<int, int>>();
+            corners.Add(new Tuple<int, int>(0, 0));
+            corners.Add(new Tuple<int, int>(0, 2));
+            corners.Add(new Tuple<int, int>(2, 0));
+            corners.Add(new Tuple<int, int>(2, 2));
+
+            sides = new List<Tuple<int, int>>();
+            sides.Add(new Tuple<int, int>(0, 1));
+            sides.Add(new Tuple<int, int>(1, 0));
+            sides.Add(new Tuple<int, int>(1, 2));
+            sides.Add(new Tuple<int, int>(2, 1));
+            sides[1] = new Tuple<int, int>(33, 3);
+
+            center = new Tuple<int, int>(1, 1);
 
             // Add the 8 different "rows" to the allRows dictionary.
             allRows[0] = new List<Tuple<int, int>>();
@@ -80,13 +107,14 @@ namespace CPUPlayer
         /// </summary>
         /// <param name="board"></param>
         /// <returns> A tuple of the column, row pair.</returns>
-        public Tuple<int, int> MakeMove(char[,] board)
+        public Tuple<int, int> MakeMove(GameBoard gameBoard)
         {
+            gameBoard.GetBoard()[0, 0] = 'x';
             if (difficulty == "Easy")
-                return MakeEasyMove(board);
+                return MakeEasyMove(gameBoard.GetBoard());
             if (difficulty == "Hard")
-                return MakeHardMove(board);
-            return MakeImpossibleMove(board);
+                return MakeHardMove(gameBoard.GetBoard());
+            return MakeImpossibleMove(gameBoard);
         }
 
         /// <summary>
@@ -234,12 +262,17 @@ namespace CPUPlayer
         /// </summary>
         /// <param name="board"></param>
         /// <returns></returns>
-        private Tuple<int, int> MakeImpossibleMove(char[,] board)
+        private Tuple<int, int> MakeImpossibleMove(GameBoard gameBoard)
         {
-            // Check if this is the opening move to be made...
-            // i.e. if(....)
-            // Similarly, check if this is the second move (opening AI move)
+            char[,] board = gameBoard.GetBoard();
 
+            // Check if this is the opening move.
+            if (gameBoard.GetTotalMoves() == 0)
+                return MakeOpeningMove(board);
+
+            // Similarly, check if this is the second move (opening AI move)
+            if (gameBoard.GetTotalMoves() == 1)
+                return MakeSecondMove(board);
 
             // Check if there is a winning move possible, then if there is a losing move to be blocked (may need to change CheckRow/MakeHardMove to account for this).
             //CheckRow(..);
@@ -249,12 +282,55 @@ namespace CPUPlayer
             // If a forking situation cannot occur, check if we can block a fork from occuring in a similar fashion.
 
             // Otherwise, play: center, opposite corner, empty corner, empty side.
+            if (board[1, 1] == '\u0000')
+                return center;
             
-
-
-
+            // FILL IN: opposite corner stuff
+            // FILL IN: empty corner
+            // FILL IN: empty side
+            //POSSIBLY will need a MakeThirdMove() before these....
 
             return null;
+        }
+
+        /// <summary>
+        /// Makes the opening move. It should either be a corner or the middle.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
+        private Tuple<int, int> MakeOpeningMove(char[,] board)
+        {
+            // Randomly choose a corner or the middle, all with equal probability. FIX FOR PICKRANDOMCONER!!!
+            int nextMove = rand.Next(5);
+            if (nextMove == 0)
+                return corners[0];
+            if (nextMove == 1)
+                return corners[1];
+            if (nextMove == 2)
+                return corners[2];
+            if (nextMove == 3)
+                return corners[3];
+            else
+                return center;
+        }
+
+        /// <summary>
+        /// Makes the second move of the game for the AI.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
+        private Tuple<int, int> MakeSecondMove(char[,] board)
+        {
+            // If the player is in the center, play a corner
+            if (board[1, 1] == 'X')
+                return PickRandomCorner();
+
+            // If the player is in a corner, play center.
+            if (board[0, 0] == 'X' || board[0, 2] == 'X' || board[2, 0] == 'X' || board[2, 2] == 'X')
+                return center;
+
+            // If the player chose a side, play center, a corner beside it, or the side across from it.
+            return center; // FIX??? RETURN OTHER POSSIBILITIES LATER!!!
         }
 
 

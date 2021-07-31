@@ -33,6 +33,8 @@ namespace View
             ai = new AIPlayer(difficultyLevel);
             rand = new Random();
 
+            loserAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\loss.wav");
+
             // Change P1 and P2 labels to account for CPU.
             p1Label.Text = "Player";
             p1Label.Location = new Point(120, 37);

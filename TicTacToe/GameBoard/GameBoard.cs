@@ -169,5 +169,14 @@ namespace Model
         {
             return lastResult;
         }
+
+        /// <summary>
+        /// Returns the number of moves made in the current game.
+        /// </summary>
+        /// <returns></returns>
+        public int GetTotalMoves()
+        {
+            return totalMoves;
+        }
     }
 }

@@ -31,6 +31,7 @@ namespace View
         private SoundPlayer moveAudio;
         private SoundPlayer winnerAudio;
         private SoundPlayer tieAudio;
+        protected SoundPlayer loserAudio;
 
         // Messages for who is up/who won the game.
         protected string p1TurnMsg = "Player 1's Turn";
@@ -50,6 +51,9 @@ namespace View
             tieAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\tie.wav");
             moveAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\move.wav");
             winnerAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\win.wav");
+
+           // Same as winner audio for local multiplayer (different for single player)
+           loserAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\win.wav");
         }
 
         /// <summary>
@@ -186,7 +190,7 @@ namespace View
                 }
                 else if(board.GetResult() == 'O')
                 {
-                    winnerAudio.Play();
+                    loserAudio.Play();
                     int wins = int.Parse(p2Wins.Text) + 1;
                     p2Wins.Text = wins + "";
                     statusIndicator.Text = p2WinMsg;
