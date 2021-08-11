@@ -286,11 +286,15 @@ namespace CPUPlayer
             if (gameBoard.GetTotalMoves() == 1)
                 return MakeSecondMove(board);
 
-            //POSSIBLY will need a MakeThirdMove() RIGHT HERE!!!!!!
-            // TODO
+            // In certain situations, the third move will need to be made in a specific spot to set a fork up.
+            Tuple<int, int> move = null;
+            if (gameBoard.GetTotalMoves() == 2)
+                move = MakeThirdMove(board);
+            if (move != null)
+                return move;
 
             // Check if there is a winning move, then if there is a losing move to be blocked.
-            Tuple<int, int> move = GetWinningOrLosingMove(board);
+            move = GetWinningOrLosingMove(board);
             if (move != null)
                 return move;
 
@@ -305,8 +309,6 @@ namespace CPUPlayer
             move = BlockForkingMove(board);
             if (move != null)
                 return move;
-
-
 
             // Otherwise, play (in this order): center, opposite corner (if opponent in a corner), empty corner, or empty side.
             if (board[1, 1] == '\u0000')
@@ -353,16 +355,76 @@ namespace CPUPlayer
                 return center;
 
             // If the player chose a side: play the center, a corner beside it, or the side across from it.
-            return center; // FIX??? RETURN OTHER POSSIBILITIES LATER!!!
+            Tuple<int, int> spot = null;
+            if (board[1, 0] == 'X')
+                spot = new Tuple<int, int>(1, 0);
+            if (board[0, 1] == 'X')
+                spot = new Tuple<int, int>(0, 1);
+            if (board[2, 1] == 'X')
+                spot = new Tuple<int, int>(2, 1);
+            else
+                spot = new Tuple<int, int>(1, 2);
+
+            int randNum = rand.Next(4);
+            if (randNum == 0)
+                return center;
+            if (randNum == 1)
+                if (spot.Item1 == 1)
+                    return new Tuple<int, int>(2, spot.Item2);
+                else
+                    return new Tuple<int, int>(spot.Item1, 2);
+            if (randNum == 2)
+                if (spot.Item1 == 1)
+                    return new Tuple<int, int>(0, spot.Item2);
+                else
+                    return new Tuple<int, int>(spot.Item1, 0);
+            else
+            if (spot.Item1 == 1)
+                if (...)
+                    return new Tuple<int, int>(0, spot.Item2);
+                else (...)
+            else
+                if (...)
+                else (...)
+                return new Tuple<int, int>(spot.Item1, 0);
         }
 
+        /// <summary>
+        /// Makes a specific third move for the AI if it needed. Otherwise, returns null.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns>A Tuple<int,int> of the move.</returns>
+        private Tuple<int, int> MakeThirdMove(char[,] board)
+        {
+            // If we're in a corner and opponent is in middle, play opposite corner.
+            if (board[1, 1] == 'X')
+            {
+                if (board[0, 0] == 'O')
+                    return new Tuple<int, int>(2, 2);
+                if (board[0, 2] == 'O')
+                    return new Tuple<int, int>(2, 0);
+                if (board[2, 0] == 'O')
+                    return new Tuple<int, int>(0, 2);
+                if (board[2, 2] == 'O')
+                    return new Tuple<int, int>(0, 0);
+                return null;
+            }
+
+            // Play any corner if both moves are in corners.
+            if (board[0, 0] == 'X' || board[0, 2] == 'X' || board[2, 0] == 'X' || board[2, 2] == 'X')
+                if (board[0, 0] == 'O' || board[0, 2] == 'O' || board[2, 0] == 'O' || board[2, 2] == 'O')
+                    return PickRandomCorner(board);
+
+            // Continue the algorithm otherwise.
+            return null;
+        }
 
         /// <summary>
         /// Fill In
         /// </summary>
         /// <param name="board"></param>
         /// <returns></returns>
-        private Tuple<int,int> GetForkingMove(char[,] board)
+        private Tuple<int, int> GetForkingMove(char[,] board)
         {
             List<Tuple<int, int>> allForkMoves = new List<Tuple<int, int>>();
 
@@ -393,7 +455,7 @@ namespace CPUPlayer
         }
 
         /// <summary>
-        /// Fill In
+        /// Fill In TODO
         /// </summary>
         /// <param name="board"></param>
         /// <returns></returns>
@@ -436,7 +498,7 @@ namespace CPUPlayer
         /// <returns></returns>
         private char[,] SetUpDummyBoard(char[,] board)
         {
-            char[,] dummyBoard = new char[3,3];
+            char[,] dummyBoard = new char[3, 3];
             for (int i = 0; i < 3; i++)
                 for (int j = 0; j < 3; j++)
                     dummyBoard[i, j] = board[i, j];
@@ -454,7 +516,7 @@ namespace CPUPlayer
         {
             // Add all open opposing corner spaces to a list.
             List<Tuple<int, int>> oppositeCorners = new List<Tuple<int, int>>();
-            if (board[0, 0] == 'X' && board[2,2] == '\u0000')
+            if (board[0, 0] == 'X' && board[2, 2] == '\u0000')
                 oppositeCorners.Add(new Tuple<int, int>(2, 2));
             if (board[2, 2] == 'X' && board[0, 0] == '\u0000')
                 oppositeCorners.Add(new Tuple<int, int>(0, 0));

@@ -151,13 +151,16 @@ namespace View
         /// </summary>
         /// <param name="row"></param>
         /// <param name="col"></param>
-        protected virtual void ExecuteMove(int row, int col)
+        /// <returns>True if the move was executed, false otherwise.</returns>
+        protected virtual bool ExecuteMove(int row, int col)
         {
             if (board.MakeMove(row, col))
             {
                 moveAudio.Play();
                 UpdateBoard();
-            }       
+                return true;
+            }
+            return false;
         }
         /// <summary>
         /// Updates the view to represent the current state of the game.

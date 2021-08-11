@@ -56,30 +56,33 @@ namespace View
 
 
         /// <summary>
-        /// NEED TO FINISH
+        /// Performs a move for the player if it's valid, followed by an AI move if the game
+        /// is not over.
         /// </summary>
         /// <param name="row"></param>
         /// <param name="col"></param>
-        protected override void ExecuteMove(int row, int col)
+        /// <returns>True if the move was executed, false otherwise.</returns>
+        protected override bool ExecuteMove(int row, int col)
         {
+            // Check if it is the player's move or the AI's.
             if (board.IsP1Turn())
             {
-                base.ExecuteMove(row, col);
-
-                // Execute AI move after 1-3 seconds if game is not over. Pass false to indicate it's not the first move of a game.
-                if (!board.IsGameOver())
+                // Make a move, then execute AI's move if player's was valid and game is not over.
+                if (base.ExecuteMove(row, col) && !board.IsGameOver())
                 {
                     while (backgroundWorker.IsBusy)
                     {
                         Application.DoEvents();
                     }
 
+                    // Pass false to indicate it's not the first move of a game.
                     backgroundWorker.RunWorkerAsync(false);
                 }
-
+                return true;
             }
-            // Otherwise it is still the AI's turn. Nothing happens.
+            return false;
         }
+
 
         /// <summary>
         /// New game has been clicked. Reset the board and update the GUI. Go with AI if its first.
@@ -144,7 +147,7 @@ namespace View
 
             // Return if the move was cancelled from new game being clicked.
             if (!e.Cancelled)
-            {                
+            {
                 firstMoveMade = true;
                 Tuple<int, int> move = ai.MakeMove(board);
                 base.ExecuteMove(move.Item1, move.Item2);
