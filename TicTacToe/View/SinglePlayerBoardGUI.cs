@@ -146,7 +146,7 @@ namespace View
             if (!e.Cancelled)
             {                
                 firstMoveMade = true;
-                Tuple<int, int> move = ai.MakeMove(board.GetBoard());
+                Tuple<int, int> move = ai.MakeMove(board);
                 base.ExecuteMove(move.Item1, move.Item2);
             }
 

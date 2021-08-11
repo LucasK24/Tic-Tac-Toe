@@ -16,7 +16,7 @@ namespace Model
     public class GameBoard
     {
         // Property representing the game board, using X's for P1, O's for P2, and null ('\u0000') for empty spaces.
-        public char[,] Board
+        public char[,] BoardMatrix
         {
             get; private set;
         }
@@ -50,7 +50,7 @@ namespace Model
         /// </summary>
         public void NewGame()
         {
-            Board = new char[3, 3];
+            BoardMatrix = new char[3, 3];
             gameOver = false;
             totalMoves = 0;
 
@@ -72,7 +72,7 @@ namespace Model
         public bool MakeMove(int row, int col)
         {
             // If the move is invalid, do nothing.
-            if (gameOver || Board[row, col] != '\u0000')
+            if (gameOver || BoardMatrix[row, col] != '\u0000')
             {
                 return false;
             }
@@ -81,11 +81,11 @@ namespace Model
             totalMoves++;
             if (p1Turn)
             {
-                Board[row, col] = 'X';
+                BoardMatrix[row, col] = 'X';
             }
             else
             {
-                Board[row, col] = 'O';
+                BoardMatrix[row, col] = 'O';
             }
 
             // Check if there is a winner or a tie.
@@ -126,14 +126,14 @@ namespace Model
                 move = 'O';
 
             // Check all 8 rows for wins.
-            if ((Board[0, 0] == move && Board[0, 1] == move && Board[0, 2] == move)
-                || (Board[1, 0] == move && Board[1, 1] == move && Board[1, 2] == move)
-                || (Board[2, 0] == move && Board[2, 1] == move && Board[2, 2] == move)
-                || (Board[0, 0] == move && Board[1, 0] == move && Board[2, 0] == move)
-                || (Board[0, 1] == move && Board[1, 1] == move && Board[2, 1] == move)
-                || (Board[0, 2] == move && Board[1, 2] == move && Board[2, 2] == move)
-                || (Board[0, 0] == move && Board[1, 1] == move && Board[2, 2] == move)
-                || (Board[0, 2] == move && Board[1, 1] == move && Board[2, 0] == move))
+            if ((BoardMatrix[0, 0] == move && BoardMatrix[0, 1] == move && BoardMatrix[0, 2] == move)
+                || (BoardMatrix[1, 0] == move && BoardMatrix[1, 1] == move && BoardMatrix[1, 2] == move)
+                || (BoardMatrix[2, 0] == move && BoardMatrix[2, 1] == move && BoardMatrix[2, 2] == move)
+                || (BoardMatrix[0, 0] == move && BoardMatrix[1, 0] == move && BoardMatrix[2, 0] == move)
+                || (BoardMatrix[0, 1] == move && BoardMatrix[1, 1] == move && BoardMatrix[2, 1] == move)
+                || (BoardMatrix[0, 2] == move && BoardMatrix[1, 2] == move && BoardMatrix[2, 2] == move)
+                || (BoardMatrix[0, 0] == move && BoardMatrix[1, 1] == move && BoardMatrix[2, 2] == move)
+                || (BoardMatrix[0, 2] == move && BoardMatrix[1, 1] == move && BoardMatrix[2, 0] == move))
             {
                 return true;
             }

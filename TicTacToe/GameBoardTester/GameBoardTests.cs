@@ -25,9 +25,9 @@ namespace Model
         {
             GameBoard board1 = new GameBoard();
             board1.MakeMove(1, 1);
-            Assert.AreEqual('X', board1.GetBoard()[1,1]);
+            Assert.AreEqual('X', board1.BoardMatrix[1,1]);
             GameBoard board2 = new GameBoard();
-            board2.MakeMove('\u0000', board2.GetBoard()[1, 1]);
+            board2.MakeMove('\u0000', board2.BoardMatrix[1, 1]);
         }
 
         [TestMethod]
@@ -79,7 +79,7 @@ namespace Model
             GameBoard board = new GameBoard();
             board.MakeMove(1, 1);
             board.NewGame();
-            Assert.AreEqual('\u0000', board.GetBoard()[1, 1]);
+            Assert.AreEqual('\u0000', board.BoardMatrix[1, 1]);
         }
 
         [TestMethod]
@@ -106,7 +106,7 @@ namespace Model
             expected[2, 2] = 'O';
             expected[1, 0] = '\u0000';
 
-            CollectionAssert.AreEqual(expected, board.GetBoard());
+            CollectionAssert.AreEqual(expected, board.BoardMatrix);
         }
 
 

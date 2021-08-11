@@ -167,15 +167,15 @@ namespace View
         private void UpdateBoard()
         {
             // Get the updated board matrix and update each button.
-            topLeft.Text = boardBoard[0, 0].ToString();
-            topMiddle.Text = boardBoard[0, 1].ToString();
-            topRight.Text = boardBoard[0, 2].ToString();
-            centerLeft.Text = boardBoard[1, 0].ToString();
-            centerMiddle.Text = boardBoard[1, 1].ToString();
-            centerRight.Text = boardBoard[1, 2].ToString();
-            bottomLeft.Text = boardBoard[2, 0].ToString();
-            bottomMiddle.Text = boardBoard[2, 1].ToString();
-            bottomRight.Text = boardBoard[2, 2].ToString();
+            topLeft.Text = board.BoardMatrix[0, 0].ToString();
+            topMiddle.Text = board.BoardMatrix[0, 1].ToString();
+            topRight.Text = board.BoardMatrix[0, 2].ToString();
+            centerLeft.Text = board.BoardMatrix[1, 0].ToString();
+            centerMiddle.Text = board.BoardMatrix[1, 1].ToString();
+            centerRight.Text = board.BoardMatrix[1, 2].ToString();
+            bottomLeft.Text = board.BoardMatrix[2, 0].ToString();
+            bottomMiddle.Text = board.BoardMatrix[2, 1].ToString();
+            bottomRight.Text = board.BoardMatrix[2, 2].ToString();
 
             // Update the rest of the board.
             if (board.IsGameOver())

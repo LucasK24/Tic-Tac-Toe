@@ -19,7 +19,7 @@ namespace View
 
 
             
-             Application.Run(new SinglePlayerBoardGUI("Hard"));
+             Application.Run(new SinglePlayerBoardGUI("Impossible"));
              
 
             //Application.Run(new HomeScreen());
