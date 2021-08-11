@@ -15,8 +15,11 @@ namespace Model
     /// </summary>
     public class GameBoard
     {
-        // Represents the game board, using X's for P1, O's for P2, and null ('\u0000') for empty spaces.
-        private char[,] board;
+        // Property representing the game board, using X's for P1, O's for P2, and null ('\u0000') for empty spaces.
+        public char[,] Board
+        {
+            get; private set;
+        }
 
         // Indicates which player's turn it is.
         private bool p1FirstTurn;
@@ -47,7 +50,7 @@ namespace Model
         /// </summary>
         public void NewGame()
         {
-            board = new char[3, 3];
+            Board = new char[3, 3];
             gameOver = false;
             totalMoves = 0;
 
@@ -69,7 +72,7 @@ namespace Model
         public bool MakeMove(int row, int col)
         {
             // If the move is invalid, do nothing.
-            if (gameOver || board[row, col] != '\u0000')
+            if (gameOver || Board[row, col] != '\u0000')
             {
                 return false;
             }
@@ -78,11 +81,11 @@ namespace Model
             totalMoves++;
             if (p1Turn)
             {
-                board[row, col] = 'X';
+                Board[row, col] = 'X';
             }
             else
             {
-                board[row, col] = 'O';
+                Board[row, col] = 'O';
             }
 
             // Check if there is a winner or a tie.
@@ -123,27 +126,20 @@ namespace Model
                 move = 'O';
 
             // Check all 8 rows for wins.
-            if ((board[0, 0] == move && board[0, 1] == move && board[0, 2] == move)
-                || (board[1, 0] == move && board[1, 1] == move && board[1, 2] == move)
-                || (board[2, 0] == move && board[2, 1] == move && board[2, 2] == move)
-                || (board[0, 0] == move && board[1, 0] == move && board[2, 0] == move)
-                || (board[0, 1] == move && board[1, 1] == move && board[2, 1] == move)
-                || (board[0, 2] == move && board[1, 2] == move && board[2, 2] == move)
-                || (board[0, 0] == move && board[1, 1] == move && board[2, 2] == move)
-                || (board[0, 2] == move && board[1, 1] == move && board[2, 0] == move))
+            if ((Board[0, 0] == move && Board[0, 1] == move && Board[0, 2] == move)
+                || (Board[1, 0] == move && Board[1, 1] == move && Board[1, 2] == move)
+                || (Board[2, 0] == move && Board[2, 1] == move && Board[2, 2] == move)
+                || (Board[0, 0] == move && Board[1, 0] == move && Board[2, 0] == move)
+                || (Board[0, 1] == move && Board[1, 1] == move && Board[2, 1] == move)
+                || (Board[0, 2] == move && Board[1, 2] == move && Board[2, 2] == move)
+                || (Board[0, 0] == move && Board[1, 1] == move && Board[2, 2] == move)
+                || (Board[0, 2] == move && Board[1, 1] == move && Board[2, 0] == move))
             {
                 return true;
             }
             return false;
         }
 
-        /// <summary>
-        /// Returns the game board's underlying matrix so that the view can be updated.
-        /// </summary>
-        public char[,] GetBoard()
-        {
-            return board;
-        }
         /// <summary>
         /// Indicates who's turn it is next.
         /// </summary>

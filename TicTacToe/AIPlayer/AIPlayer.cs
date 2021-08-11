@@ -3,8 +3,8 @@
  * 
  * Author: Lucas Katsanevas
  * 
- * Version 1.0 (1/16/21) - Created button click events.
- * Version 1.1 (1/16/21) - Implemented ExecuteMove and UpdateBoard.
+ * Version 1.0 (//21) - 
+ * Version 1.1 (1/16/21) -
  */
 
 using System;
@@ -109,7 +109,6 @@ namespace CPUPlayer
         /// <returns> A tuple of the column, row pair.</returns>
         public Tuple<int, int> MakeMove(GameBoard gameBoard)
         {
-            gameBoard.GetBoard()[0, 0] = 'x';
             if (difficulty == "Easy")
                 return MakeEasyMove(gameBoard.GetBoard());
             if (difficulty == "Hard")
@@ -146,19 +145,30 @@ namespace CPUPlayer
         /// <returns>A tuple of the AI's move (a column-row pair)</returns>
         private Tuple<int, int> MakeHardMove(char[,] board)
         {
+            Tuple<int, int> result = GetWinningOrLosingMove(board);
+            if (result != null)
+                return result;
+
+            return MakeEasyMove(board);
+        }
+
+
+        /// <summary>
+        /// Helper for making a winning move if there is one or blocking a loss from occuring if possible. Returns
+        /// null if neither such move exists.
+        /// </summary>
+        /// <param name=""></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        private Tuple<int, int> GetWinningOrLosingMove(char[,] board)
+        {
             // Lists that keep track of the RowIDs of winning moves to make or losing moves to block.
             List<int> WinningMoves = new List<int>();
             List<int> LosingMoves = new List<int>();
 
             // Check each possible row/col/diagonal for a win/loss. If there is one, add to winning or losing move list.
-            CheckRow(board, 0, WinningMoves, LosingMoves); // RowID: 0
-            CheckRow(board, 1, WinningMoves, LosingMoves); // RowID: 1
-            CheckRow(board, 2, WinningMoves, LosingMoves); // ....           
-            CheckRow(board, 3, WinningMoves, LosingMoves);
-            CheckRow(board, 4, WinningMoves, LosingMoves);
-            CheckRow(board, 5, WinningMoves, LosingMoves);
-            CheckRow(board, 6, WinningMoves, LosingMoves);
-            CheckRow(board, 7, WinningMoves, LosingMoves);
+            for (int rowID = 0; rowID < 8; rowID++)
+                CheckRow(board, rowID, WinningMoves, LosingMoves);
 
             // Get a move from the winning list, if any.
             if (WinningMoves.Count != 0)
@@ -174,13 +184,12 @@ namespace CPUPlayer
                 return CompleteRow(board, LosingMoves[move]);
             }
 
-            // Otherwise make a random move.
-            return MakeEasyMove(board);
+            return null;
         }
 
         /// <summary>
         /// Uses counters for 'X's and 'O's to see if this row/column/diagonal has a winning move for either player.
-        /// Adds to the correct list the rowID if so.
+        /// Adds the rowID to the correct list if so.
         /// </summary>
         /// <param name="first"></param>
         /// <param name="second"></param>
@@ -258,35 +267,48 @@ namespace CPUPlayer
 
 
         /// <summary>
-        /// Performs moves so that it is impossible to lose...... 
+        /// Performs an "impossible" to beat move. If the AI uses this for all of its moves, it will be guaranteed
+        /// to tie. 
         /// </summary>
         /// <param name="board"></param>
-        /// <returns></returns>
+        /// <returns>A Tuple<int,int> of the best move available move. Returns null if board is full.</returns>
         private Tuple<int, int> MakeImpossibleMove(GameBoard gameBoard)
         {
+            // Check there is at least one open move before continuing.
+            if (gameBoard.GetTotalMoves() >= 9)
+                return null;
+
             char[,] board = gameBoard.GetBoard();
 
-            // Check if this is the opening move.
+            // Check if this is the AI's opening move.
             if (gameBoard.GetTotalMoves() == 0)
-                return MakeOpeningMove(board);
-
-            // Similarly, check if this is the second move (opening AI move)
+                return MakeFirstMove(board);
             if (gameBoard.GetTotalMoves() == 1)
                 return MakeSecondMove(board);
 
-            // Check if there is a winning move possible, then if there is a losing move to be blocked (may need to change CheckRow/MakeHardMove to account for this).
-            //CheckRow(..);
+            //POSSIBLY will need a MakeThirdMove() RIGHT HERE!!!!!!
+
+
+            // Check if there is a winning move, then if there is a losing move to be blocked.
+            Tuple<int, int> move = GetWinningOrLosingMove(board);
+            if (move != null)
+                return move;
+
 
             // See if a forking situation can occur. We may be able to do this using a dummy table and calling CheckRow to see if 2 different ways to win pop up.
+            move = GetForkingMove(board);
+            if (move != null)
+                return move;
 
-            // If a forking situation cannot occur, check if we can block a fork from occuring in a similar fashion.
-
-            // Otherwise, play (in this order): center, opposite corner, empty corner, or empty side.
+            // If a forking situation cannot occur, check if we can block a fork from occuring in a similar fashion. (this may involve forcing opponent to block us from getting 3 in a row).
+            // Otherwise, play (in this order): center, opposite corner (if opponent in a corner), empty corner, or empty side.
             if (board[1, 1] == '\u0000')
                 return center;
 
-            //POSSIBLY will need a MakeThirdMove() before these....
-            // FILL IN: opposite corner stuff
+
+            move = GetRandomOppositeCorner(board);
+            if (move != null)
+                return move;
 
             if (board[0, 0] == '\u0000' || board[0, 2] == '\u0000' || board[2, 0] == '\u0000' || board[2, 2] == '\u0000')
                 return PickRandomCorner(board);
@@ -299,7 +321,7 @@ namespace CPUPlayer
         /// </summary>
         /// <param name="board"></param>
         /// <returns></returns>
-        private Tuple<int, int> MakeOpeningMove(char[,] board)
+        private Tuple<int, int> MakeFirstMove(char[,] board)
         {
             // Randomly choose a corner or the middle spot with equal probability for each spot.
             int nextMove = rand.Next(5);
@@ -327,6 +349,49 @@ namespace CPUPlayer
             // If the player chose a side: play the center, a corner beside it, or the side across from it.
             return center; // FIX??? RETURN OTHER POSSIBILITIES LATER!!!
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
+        private Tuple<int,int> MakeForkingMove(char[,] board)
+        {
+            char[,] dummyBoard = new char[3,3];
+            board[1, 1] = 'x';
+            for(int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    dummyBoard[i,j] = 
+
+            return null;
+        }
+
+        /// <summary>
+        /// Randomly selects an open corner space opposite of an opponent corner move.
+        /// If no such moves exist, returns null.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns>A tuple<int,int> of the row-column pair.</int></returns>
+        private Tuple<int, int> GetRandomOppositeCorner(char[,] board)
+        {
+            // Add all open opposing corner spaces to a list.
+            List<Tuple<int, int>> oppositeCorners = new List<Tuple<int, int>>();
+            if (board[0, 0] == 'X' && board[2,2] == '\u0000')
+                oppositeCorners.Add(new Tuple<int, int>(2, 2));
+            if (board[2, 2] == 'X' && board[0, 0] == '\u0000')
+                oppositeCorners.Add(new Tuple<int, int>(0, 0));
+            if (board[2, 0] == 'X' && board[0, 2] == '\u0000')
+                oppositeCorners.Add(new Tuple<int, int>(0, 2));
+            if (board[0, 2] == 'X' && board[2, 0] == '\u0000')
+                oppositeCorners.Add(new Tuple<int, int>(2, 0));
+
+            if (oppositeCorners.Count == 0)
+                return null;
+            return oppositeCorners[rand.Next(oppositeCorners.Count)];
+        }
+
+
 
         /// <summary>
         /// Randomly selects an open corner space.
