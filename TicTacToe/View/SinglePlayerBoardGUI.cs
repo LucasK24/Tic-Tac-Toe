@@ -146,7 +146,7 @@ namespace View
             newGame.Enabled = false;
 
             // Return if the move was cancelled from new game being clicked.
-            if (!e.Cancelled)
+            if (!e.Cancelled && !board.IsP1Turn())
             {
                 firstMoveMade = true;
                 Tuple<int, int> move = ai.MakeMove(board);
