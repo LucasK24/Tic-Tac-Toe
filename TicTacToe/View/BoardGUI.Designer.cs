@@ -270,7 +270,7 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(196, 45);
             this.tableLayoutPanel1.TabIndex = 17;
             // 
-            // MultiplayerBoard
+            // BoardGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -292,7 +292,9 @@
             this.Controls.Add(this.p1Wins);
             this.Controls.Add(this.p2Label);
             this.Controls.Add(this.p1Label);
-            this.Name = "MultiplayerBoard";
+            this.Location = new System.Drawing.Point(100, 100);
+            this.Name = "BoardGUI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Tic-Tac-Toe";
             ((System.ComponentModel.ISupportInitialize)(this.gridPicture)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

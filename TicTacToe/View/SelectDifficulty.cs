@@ -12,11 +12,20 @@ namespace View
 {
     public partial class SelectDifficulty : Form
     {
+
+        public delegate void DifficultySelectedHandler(string diff);
+        public event DifficultySelectedHandler DifficultySelected;
+
+        // Keeps track of if a button was clicked (to differentiate between closing with 'X' and clicking buttons)
+        private bool buttonClicked;
+
         /// <summary>
         /// Initializes the form for to select a difficulty.
         /// </summary>
         public SelectDifficulty()
         {
+            FormClosing += ExitProgram;
+            buttonClicked = false;
             InitializeComponent();
         }
 
@@ -27,7 +36,9 @@ namespace View
         /// <param name="e"></param>
         private void easyButton_Click(object sender, EventArgs e)
         {
-
+            buttonClicked = true;
+            DifficultySelected("Easy");
+            this.Close();
         }
 
         /// <summary>
@@ -37,7 +48,9 @@ namespace View
         /// <param name="e"></param>
         private void hardButton_Click(object sender, EventArgs e)
         {
-
+            buttonClicked = true;
+            DifficultySelected("Hard");
+            this.Close();
         }
 
         /// <summary>
@@ -47,7 +60,15 @@ namespace View
         /// <param name="e"></param>
         private void impossibleButton_Click(object sender, EventArgs e)
         {
+            buttonClicked = true;
+            DifficultySelected("Impossible");
+            this.Close();
+        }
 
+        private void ExitProgram(object sender, EventArgs e)
+        {
+            if (buttonClicked == false)
+                DifficultySelected("Exit");
         }
     }
 }
