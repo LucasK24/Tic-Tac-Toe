@@ -195,9 +195,9 @@ namespace CPUPlayer
         /// <param name="second"></param>
         /// <param name="third"></param>
         /// <param name="rowID"></param>
-        /// <param name="WinningMoves"></param>
-        /// <param name="LosingMoves"></param>
-        private void CheckRow(char[,] board, int rowID, List<int> WinningMoves, List<int> LosingMoves)
+        /// <param name="AIWinningRows"></param>
+        /// <param name="HumanWinningRows"></param>
+        private void CheckRow(char[,] board, int rowID, List<int> AIWinningRows, List<int> HumanWinningRows)
         {
             // Based on the rowID, get the current state of each slot in the row.
             char first = board[allRows[rowID][0].Item1, allRows[rowID][0].Item2];
@@ -222,11 +222,11 @@ namespace CPUPlayer
             else if (third == 'X')
                 XCounter++;
 
-            // Add rowID to Winning or LosingMoves list based on if there is a winning move for either player.
+            // Add rowID to a list based on if there is a winning move for either player.
             if (OCounter == 2 && XCounter == 0)
-                WinningMoves.Add(rowID);
+                AIWinningRows.Add(rowID);
             else if (XCounter == 2 && OCounter == 0)
-                LosingMoves.Add(rowID);
+                HumanWinningRows.Add(rowID);
         }
 
         /// <summary>
@@ -261,11 +261,6 @@ namespace CPUPlayer
         }
 
 
-
-
-
-
-
         /// <summary>
         /// Performs an "impossible" to beat move. If the AI uses this for all of its moves, it will be guaranteed
         /// to tie. 
@@ -274,10 +269,6 @@ namespace CPUPlayer
         /// <returns>A Tuple<int,int> of the best move available move. Returns null if board is full.</returns>
         private Tuple<int, int> MakeImpossibleMove(GameBoard gameBoard)
         {
-            // Check there is at least one open move before continuing.
-            if (gameBoard.GetTotalMoves() >= 9)
-                return null;
-
             char[,] board = gameBoard.BoardMatrix;
 
             // Check if this is the AI's opening move.
@@ -293,19 +284,18 @@ namespace CPUPlayer
             if (move != null)
                 return move;
 
-            // Check if there is a winning move, then if there is a losing move to be blocked.
+            // Check if there is a winning move, then if there is a losing move to block.
             move = GetWinningOrLosingMove(board);
             if (move != null)
                 return move;
 
 
-            // See if a forking situation can occur. We may be able to do this using a dummy table and calling CheckRow to see if 2 different ways to win pop up.
+            // See if we can create a fork (two ways to win next turn).
             move = GetForkingMove(board);
             if (move != null)
                 return move;
 
-            // If a forking situation cannot occur, check if we can block a fork from occuring in a similar fashion. (this may involve forcing opponent to block us from getting 3 in a row).
-            // TODO
+            // Check if we can block an opponent from creating a fork on their next turn (this may involve forcing opponent to block us from getting 3 in a row).
             move = BlockForkingMove(board);
             if (move != null)
                 return move;
@@ -355,38 +345,65 @@ namespace CPUPlayer
                 return center;
 
             // If the player chose a side: play the center, a corner beside it, or the side across from it.
+            return SecondMoveFollowingSide(board);
+        }
+
+        /// <summary>
+        /// Helper method to make a move after the first move is a side move.
+        /// With equal probabilities, this will choose between the side across from
+        /// it, the center, or one of the corners beside it.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
+        private Tuple<int, int> SecondMoveFollowingSide(char[,] board)
+        {
+            int randNum = rand.Next(4);
+
+            // Let 0 represent the center.
+            if (randNum == 0)
+                return center;
+
+            // Let 1 be for the side across from it.
+            if (randNum == 1)
+            {
+                if (board[1, 0] == 'X')
+                    return new Tuple<int, int>(1, 2);
+                else if (board[0, 1] == 'X')
+                    return new Tuple<int, int>(2, 1);
+                else if (board[2, 1] == 'X')
+                    return new Tuple<int, int>(0, 1);
+                else
+                    return new Tuple<int, int>(1, 0);
+            }
+
+            // Let 2 and 3 represent the corners beside it. First, store the correct side.
             Tuple<int, int> spot = null;
             if (board[1, 0] == 'X')
                 spot = new Tuple<int, int>(1, 0);
-            if (board[0, 1] == 'X')
+            else if (board[0, 1] == 'X')
                 spot = new Tuple<int, int>(0, 1);
-            if (board[2, 1] == 'X')
+            else if (board[2, 1] == 'X')
                 spot = new Tuple<int, int>(2, 1);
             else
                 spot = new Tuple<int, int>(1, 2);
 
-            int randNum = rand.Next(4);
-            if (randNum == 0)
-                return center;
-            if (randNum == 1)
+            // Now, adjust 1 space from spot to get one of the correct corners.
+            if (randNum == 2)
+            {
                 if (spot.Item1 == 1)
                     return new Tuple<int, int>(2, spot.Item2);
                 else
                     return new Tuple<int, int>(spot.Item1, 2);
-            if (randNum == 2)
+            }
+            else
+            {
                 if (spot.Item1 == 1)
                     return new Tuple<int, int>(0, spot.Item2);
                 else
                     return new Tuple<int, int>(spot.Item1, 0);
-            else
-            if (spot.Item1 == 1)
-                if (...)
-                    return new Tuple<int, int>(0, spot.Item2);
-                else (...)
-            else
-                if (...)
-                else (...)
-                return new Tuple<int, int>(spot.Item1, 0);
+            }
+
+
         }
 
         /// <summary>
@@ -420,15 +437,17 @@ namespace CPUPlayer
         }
 
         /// <summary>
-        /// Fill In
+        /// Returns one of the available forking moves, if any exist.
+        /// In other words, returns a move that allows there to be two
+        /// ways to win for the AI.
         /// </summary>
         /// <param name="board"></param>
-        /// <returns></returns>
+        /// <returns>A Tuple<int,int> of the move (null is returned if no forking move exists).</returns>
         private Tuple<int, int> GetForkingMove(char[,] board)
         {
             List<Tuple<int, int>> allForkMoves = new List<Tuple<int, int>>();
 
-            // Look through all possible moves for fork moves.
+            // Look through all possible moves for forks.
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -455,15 +474,90 @@ namespace CPUPlayer
         }
 
         /// <summary>
-        /// Fill In TODO
+        ///  Blocks an opponent from creating a fork on their next turn if possible.
+        ///  This may involve forcing the opponent to block the AI from getting 3 in a row
+        ///  on the next turn.
         /// </summary>
-        /// <param name="board"></param>
+        /// <param name="board">A Tuple<int,int> of the move, null otherwise.</param>
         /// <returns></returns>
         private Tuple<int, int> BlockForkingMove(char[,] board)
         {
-            List<Tuple<int, int>> allForkBlockingMoves = new List<Tuple<int, int>>();
+            // If there are no forks to block, do nothing.
+            if (!DoesOpponentForkExist(board))
+                return null;
 
-            // Look through all possible moves for fork blocking moves.
+            // Find all AI moves that result in 0 forks for the opponent.
+            List<Tuple<int, int>> blockingMoves = new List<Tuple<int, int>>();
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (board[i, j] != '\u0000')
+                        continue;
+
+                    // Simulate AI move.
+                    char[,] dummyBoard = SetUpDummyBoard(board);
+                    dummyBoard[i, j] = 'O';
+
+                    // Simulate opponent move. Opponent will first need to block an AI 3 in a row from occuring.
+                    List<int> AIWinningRows = new List<int>();
+                    for (int rowID = 0; rowID < 8; rowID++)
+                        CheckRow(dummyBoard, rowID, AIWinningRows, new List<int>());
+
+                    if (AIWinningRows.Count > 0)
+                    {
+                        // Have the human move block the win from occuring.
+                        Tuple<int, int> move = CompleteRow(dummyBoard, AIWinningRows[0]);
+                        dummyBoard[move.Item1, move.Item2] = 'X';
+
+                        // Now check if the human's block caused a fork to occur for the human. If not, add (i,j) to blocking moves.
+                        List<int> HumanWinningMoves = new List<int>();
+                        for (int rowID = 0; rowID < 8; rowID++)
+                            CheckRow(dummyBoard, rowID, new List<int>(), HumanWinningMoves);
+                        if (HumanWinningMoves.Count < 2)
+                            blockingMoves.Add(new Tuple<int, int>(i, j));
+                        continue;
+                    }
+
+                    // If there are no 3 in a rows to block for the human, Check if any forking moves can be made by them. If there aren't any, (i,j) is a blocking move.
+                    bool forksExist = false;
+                    for (int row = 0; i < 3; i++)
+                    {
+                        for (int col = 0; j < 3; j++)
+                        {
+                            if (dummyBoard[row, col] != '\u0000')
+                                continue;
+
+                            char[,] dummyOfDummyBoard = SetUpDummyBoard(dummyBoard);
+                            dummyOfDummyBoard[row, col] = 'X';
+
+                            // Now check if the human's move made a fork for them. If not, add (i,j) to blocking moves.
+                            List<int> HumanWinningMoves = new List<int>();
+                            for (int rowID = 0; rowID < 8; rowID++)
+                                CheckRow(dummyOfDummyBoard, rowID, new List<int>(), HumanWinningMoves);
+                            if (HumanWinningMoves.Count > 1)
+                            {
+                                forksExist = true;
+                            }
+                        }
+                    }
+                    if (!forksExist)
+                        blockingMoves.Add(new Tuple<int, int>(i, j));
+                }
+            }
+            // Randomly select one of these moves.
+            return blockingMoves[rand.Next(blockingMoves.Count)];
+        }
+
+        /// <summary>
+        /// Returns true if the opponent can make a forking move, false otherwise.
+        /// This is intended to be used as a helper for the BlockForkingMove method.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
+        private bool DoesOpponentForkExist(char[,] board)
+        {
+            // Look through all possible opponent moves for forks. If none exist, return null.
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -472,23 +566,21 @@ namespace CPUPlayer
                         continue;
 
                     char[,] dummyBoard = SetUpDummyBoard(board);
-                    dummyBoard[i, j] = 'O';
+                    dummyBoard[i, j] = 'X';
 
-                    // Check if there are at least two ways to win as a result.
-                    List<int> WinningMoves = new List<int>();
+                    // Check if there are at least two ways for the opponent to win.
+                    List<int> OpponentWinningMoves = new List<int>();
                     for (int rowID = 0; rowID < 8; rowID++)
-                        CheckRow(dummyBoard, rowID, WinningMoves, new List<int>());
-                    if (WinningMoves.Count > 1)
-                        allForkBlockingMoves.Add(new Tuple<int, int>(i, j));
+                        CheckRow(dummyBoard, rowID, new List<int>(), OpponentWinningMoves);
+                    if (OpponentWinningMoves.Count > 1)
+                    {
+                        return true;
+                    }
                 }
             }
+            return false;
 
-            // Randomly select one of the fork moves.
-            if (allForkBlockingMoves.Count == 0)
-                return null;
-            return allForkBlockingMoves[rand.Next(allForkBlockingMoves.Count)];
         }
-
 
 
         /// <summary>
