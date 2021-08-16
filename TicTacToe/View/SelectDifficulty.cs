@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Represents the Select Difficulty screen for the game.
+ * 
+ * Author: Lucas Katsanevas
+ * 
+ * Version 1.0 (July 2021) - Created everything for the screen and how it will look.
+ * Version 1.1 (August 2021) - Added button-clicking events to link to other parts of GUI.
+ */
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +20,10 @@ using System.Windows.Forms;
 
 namespace View
 {
+    /// <summary>
+    /// This is the form brought up when the Single-Player" button is clicked. 
+    /// It allows the user to click buttons for easy, hard, and impossible mode.
+    /// </summary>
     public partial class SelectDifficulty : Form
     {
 
@@ -20,7 +34,7 @@ namespace View
         private bool buttonClicked;
 
         /// <summary>
-        /// Initializes the form for to select a difficulty.
+        /// Initializes the form.
         /// </summary>
         public SelectDifficulty()
         {
@@ -65,6 +79,12 @@ namespace View
             this.Close();
         }
 
+        /// <summary>
+        /// Triggered from the FormClosed event. If the top-right "X" was clicked,
+        /// sets up the program for termination.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExitProgram(object sender, EventArgs e)
         {
             if (buttonClicked == false)

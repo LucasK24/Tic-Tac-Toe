@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+ * A BoardGUI to be used for games against an AI player.
+ * 
+ * Author: Lucas Katsanevas
+ * 
+ * Version 1.0 (July 2021) - Changed messages and sounds where needed and added ExecuteMove.
+ * Version 1.1 (August 2021) - Implemented a BackGroundWorker for AI moves.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +23,9 @@ using CPUPlayer;
 namespace View
 {
     /// <summary>
-    /// 
+    /// BoardGUI for single player mode, which gives the AI 1-3 seconds before
+    /// making each move. The AI can be easy, hard, or impossible to beat, depending
+    /// on the difficulty previously selected.
     /// </summary>
     public partial class SinglePlayerBoardGUI : BoardGUI
     {
@@ -27,12 +38,13 @@ namespace View
 
         /// <summary>
         /// Sets up the game board and makes changes for when a player is up against an AI.
+        /// The input difficultyLevel must be "Easy" for easy mode, "Hard" for hard mode, and "Impossible" (or any
+        /// other string) for Impossible mode.
         /// </summary>
         public SinglePlayerBoardGUI(string difficultyLevel)
         {
             ai = new AIPlayer(difficultyLevel);
             rand = new Random();
-
             loserAudio = new System.Media.SoundPlayer(@"..\..\..\Resources\Audio\loss.wav");
 
             // Change P1 and P2 labels to account for CPU.
@@ -67,7 +79,7 @@ namespace View
             // Check if it is the player's move or the AI's.
             if (board.IsP1Turn())
             {
-                // Make a move, then execute AI's move if player's was valid and game is not over.
+                // Make a move, then execute AI's move if player's move was valid and game is not over.
                 if (base.ExecuteMove(row, col) && !board.IsGameOver())
                 {
                     while (backgroundWorker.IsBusy)
@@ -111,7 +123,8 @@ namespace View
 
 
         /// <summary>
-        /// Waits for 1-3 seconds before making a move.
+        /// Waits for 1-3 seconds before a move is made. If the new game button has been clicked during this time, 
+        /// the completion of the AI move is cancelled.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -120,7 +133,7 @@ namespace View
             bool isNewGameFirstMove = (bool)e.Argument;
             if (isNewGameFirstMove)
             {
-                // If this is a new game, check to make sure clicking new game 2 or more times didn't cause the first move to be made already.
+                // If this is a new game, ensure clicking new game 2+ times didn't cause the first move to be made already.
                 if (firstMoveMade)
                 {
                     e.Cancel = true;

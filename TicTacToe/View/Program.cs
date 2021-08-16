@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+ * Contains the Main method at its helpers for the application.
+ * 
+ * Author: Lucas Katsanevas
+ * 
+ * Version 1.0 (January 2021) - 
+ * Version 1.1 (August 2021) -
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,6 +15,11 @@ using System.Windows.Forms;
 
 namespace View
 {
+    /// <summary>
+    /// Starts the tic-tac-toe application. Event listeners are
+    /// used in order to set the mode and difficulty level within
+    /// this class.
+    /// </summary>
     static class Program
     {
 

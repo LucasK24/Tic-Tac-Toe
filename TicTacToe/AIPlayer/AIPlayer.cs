@@ -3,8 +3,12 @@
  * 
  * Author: Lucas Katsanevas
  * 
- * Version 1.0 (//21) - 
- * Version 1.1 (1/16/21) -
+ * Version 1.0 (July 2021)  - Created constructor and easy mode.
+ *                          - Made hard mode and its helper methods.
+ * Version 1.1 (August 2021)- Made skeleton code for impossible and its random spot choosing methods.
+ *                          - Implemented 1st, 2nd, and 3rd move methods.
+ *                          - Created forking and blocking forks logic.
+ *                          - Various bug fixes.                         
  */
 
 using System;
@@ -36,7 +40,7 @@ namespace CPUPlayer
         private readonly Tuple<int, int> center;
 
         /// <summary>
-        /// Creates an AI player with the input difficulty level. May be "Easy", "Hard", or "Impossible.
+        /// Creates an AI player with the input difficulty level. May be "Easy", "Hard", or "Impossible".
         /// </summary>
         public AIPlayer(string difficultyLevel)
         {
@@ -130,7 +134,6 @@ namespace CPUPlayer
             {
                 row = rand.Next(3);
                 col = rand.Next(3);
-
                 if (board[row, col] == '\u0000')
                     break;
             }
@@ -142,20 +145,20 @@ namespace CPUPlayer
         /// Otherwise, makes a random move.
         /// </summary>
         /// <param name="board"></param>
-        /// <returns>A tuple of the AI's move (a column-row pair)</returns>
+        /// <returns>A tuple of the AI's move (column-row pair)</returns>
         private Tuple<int, int> MakeHardMove(char[,] board)
         {
             Tuple<int, int> result = GetWinningOrLosingMove(board);
             if (result != null)
                 return result;
-
             return MakeEasyMove(board);
         }
 
 
+
         /// <summary>
         /// Helper for making a winning move if there is one or blocking a loss from occuring if possible. Returns
-        /// null if neither such move exists.
+        /// a tuple of the move or null if neither such move exists.
         /// </summary>
         /// <param name=""></param>
         /// <param name=""></param>
@@ -230,7 +233,7 @@ namespace CPUPlayer
         }
 
         /// <summary>
-        /// Returns the open move in this row, if there is one. Returns null otherwise. This is intended to only be used
+        /// Returns the open move in this row if there is one, null otherwise. This is intended to only be used
         /// to complete a row (i.e. when there are two X's or O's and an empty spot).
         /// </summary>
         /// <param name="first"></param>
@@ -266,7 +269,7 @@ namespace CPUPlayer
         /// to tie. 
         /// </summary>
         /// <param name="board"></param>
-        /// <returns>A Tuple<int,int> of the best move available move. Returns null if board is full.</returns>
+        /// <returns>A Tuple of the best move available move. Returns null if board is full.</returns>
         private Tuple<int, int> MakeImpossibleMove(GameBoard gameBoard)
         {
             char[,] board = gameBoard.BoardMatrix;
@@ -318,7 +321,7 @@ namespace CPUPlayer
         /// Makes the opening move. It should either be a corner or the middle.
         /// </summary>
         /// <param name="board"></param>
-        /// <returns></returns>
+        /// <returns>A tuple of the row-column pair</returns>
         private Tuple<int, int> MakeFirstMove(char[,] board)
         {
             // Randomly choose a corner or the middle spot with equal probability for each spot.
@@ -410,10 +413,10 @@ namespace CPUPlayer
         /// Makes a specific third move for the AI if it needed. Otherwise, returns null.
         /// </summary>
         /// <param name="board"></param>
-        /// <returns>A Tuple<int,int> of the move.</returns>
+        /// <returns>A Tuple of the move.</returns>
         private Tuple<int, int> MakeThirdMove(char[,] board)
         {
-            // If we're in a corner and opponent is in middle, play opposite corner.
+            // If we're in a corner and opponent is in middle, play the opposite corner.
             if (board[1, 1] == 'X')
             {
                 if (board[0, 0] == 'O')
@@ -442,7 +445,7 @@ namespace CPUPlayer
         /// ways to win for the AI.
         /// </summary>
         /// <param name="board"></param>
-        /// <returns>A Tuple<int,int> of the move (null is returned if no forking move exists).</returns>
+        /// <returns>A Tuple of the move (null is returned if no forking move exists).</returns>
         private Tuple<int, int> GetForkingMove(char[,] board)
         {
             List<Tuple<int, int>> allForkMoves = new List<Tuple<int, int>>();
@@ -478,7 +481,7 @@ namespace CPUPlayer
         ///  This may involve forcing the opponent to block the AI from getting 3 in a row
         ///  on the next turn.
         /// </summary>
-        /// <param name="board">A Tuple<int,int> of the move, null otherwise.</param>
+        /// <param name="board">A Tuple of the move, null otherwise.</param>
         /// <returns></returns>
         private Tuple<int, int> BlockForkingMove(char[,] board)
         {
@@ -582,7 +585,6 @@ namespace CPUPlayer
 
         }
 
-
         /// <summary>
         /// Returns a deep copy 3x3 char matrix of the board.
         /// </summary>
@@ -603,7 +605,7 @@ namespace CPUPlayer
         /// If no such moves exist, returns null.
         /// </summary>
         /// <param name="board"></param>
-        /// <returns>A tuple<int,int> of the row-column pair.</int></returns>
+        /// <returns>A tuple of the row-column pair.</returns>
         private Tuple<int, int> GetRandomOppositeCorner(char[,] board)
         {
             // Add all open opposing corner spaces to a list.
@@ -628,7 +630,7 @@ namespace CPUPlayer
         /// Randomly selects an open corner space.
         /// </summary>
         /// <param name="board"></param>
-        /// <returns>A tuple<int,int> of the row-column pair.</int></returns>
+        /// <returns>A tuple of the row-column pair.</returns>
         private Tuple<int, int> PickRandomCorner(char[,] board)
         {
             // Go until we get an empty spot.
@@ -660,7 +662,7 @@ namespace CPUPlayer
         /// Randomly selects an open side space.
         /// </summary>
         /// <param name="board"></param>
-        /// <returns>A tuple<int,int> of the row-column pair.</int></returns>
+        /// <returns>A tuple of the row-column pair.</returns>
         private Tuple<int, int> PickRandomSide(char[,] board)
         {
             // Loop until we get an empty side.

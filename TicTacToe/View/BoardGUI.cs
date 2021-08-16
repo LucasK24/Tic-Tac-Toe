@@ -3,8 +3,8 @@
  * 
  * Author: Lucas Katsanevas
  * 
- * Version 1.0 (1/16/21) - Created button click events.
- * Version 1.1 (1/16/21) - Implemented ExecuteMove and UpdateBoard.
+ * Version 1.0 (January 2021) - Created button click events.
+ *                            - Implemented ExecuteMove and UpdateBoard.
  */
 
 using System;

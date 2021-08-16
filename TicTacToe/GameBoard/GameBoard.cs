@@ -1,21 +1,25 @@
 ﻿/**
- * Represents the board for Tic-Tac-Toe. This is the model of the MVC.
+ * Represents the board for Tic-Tac-Toe.
  * 
  * Author: Lucas Katsanevas
  * 
- * Version 1.0 (1/15/21) - Created constructor and code skeleton.
- * Version 1.1 (1/15/21) - Implemented methods and created properties.
+ * Version 1.0 (January 2021) - Created constructor and code skeleton.
+ *                            - Implemented methods and created properties.
+ * Version 1.1 (August 2021)  - Added GetTotalMoves method and made a BoardMatrix property.           
  */
 using System;
 
 namespace Model
 {
     /// <summary>
-    /// Represents a tic-tac-toe board.
+    /// Represents a tic-tac-toe board and is the model of the project.
     /// </summary>
     public class GameBoard
     {
-        // Property representing the game board, using X's for P1, O's for P2, and null ('\u0000') for empty spaces.
+        /// <summary>
+        /// Property representing the game board, using X's for P1,
+        /// O's for P2, and null ('\u0000') for empty spaces.
+        /// </summary>
         public char[,] BoardMatrix
         {
             get; private set;
