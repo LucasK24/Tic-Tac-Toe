@@ -1,5 +1,6 @@
 # Tic-Tac-Toe
 Author: Lucas Katsenevas
+
 Last Modified: 8/17/2021
 
 Currently, this tic-tac-toe application supports local multiplayer and single player modes. It keeps track of each player's total wins
