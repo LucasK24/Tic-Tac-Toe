@@ -12,4 +12,6 @@ each each with equal probability. On hard, the AI always makes winning moves (co
 the AI will always play a perfect game - it is guaranteed to win or tie. However, the player can't play the same pattern each
 time to ensure ties, since the AI will make different moves and try different forking strategies from game to game.
 
+To begin the application, go to View -> bin -> debug -> View.exe
+
 All sound effects come from: https://mixkit.co/
